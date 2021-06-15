@@ -1,5 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import {Button} from "reactstrap";
+import React from "react";
+
 
 function App() {
   return (
@@ -18,6 +21,23 @@ function App() {
           Learn React
         </a>
       </header>
+            <Button color="primary" className="m-2">
+                Button
+            </Button>
+            <Button color="primary" className="m-2">
+        <span className="btn-wrapper--icon">
+        </span>
+                <span className="btn-wrapper--label">Left icon</span>
+            </Button>
+            <Button color="primary" className="m-2">
+                <span className="btn-wrapper--label">Right icon</span>
+                <span className="btn-wrapper--icon">
+        </span>
+            </Button>
+            <Button color="primary" className="m-2">
+        <span className="btn-wrapper--icon">
+        </span>
+            </Button>
     </div>
   );
 }
