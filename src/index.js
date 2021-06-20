@@ -1,13 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import {Router} from "react-router-dom";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import history from "./history";
+import Routes from './boot/Router';
+import axios from "axios";
 
+let token;
+let tchat_token = localStorage.getItem("token");
+
+if (tchat_token) {
+    token = localStorage.getItem("token");
+}
+//
+axios.defaults.baseURL = "http://localhost:8000/";
+
+if (token) {
+    axios.defaults.headers['Authorization'] = `${token}`;
+}
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <Router history={history}>
+        <React.StrictMode>
+            <React.Fragment>
+                <Routes>
+                    <App/>
+                </Routes>
+            </React.Fragment>
+        </React.StrictMode>
+    </Router>,
   document.getElementById('root')
 );
 
