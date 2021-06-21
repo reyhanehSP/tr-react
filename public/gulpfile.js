@@ -60,8 +60,8 @@ function images() {
 
 function font() {
     return gulp
-        .src("assets/app/fonts/*")
-        .pipe(gulp.dest("dest/fonts/"))
+        .src("assets/app/fonts/**/*.{eot,svg,ttf,woff,woff2}")
+        .pipe(gulp.dest("dest/fonts"))
 }
 
 // CSS task

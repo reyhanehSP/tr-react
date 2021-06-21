@@ -1,8 +1,8 @@
 import React from "react";
 import history from "../../history";
 import axios from "axios";
-import pic from "./login-pic.png";
-import logo from "./295.png"
+import ParticlesBg from 'particles-bg'
+import logo from "./295.png";
 
 
 class Login extends React.Component {
@@ -36,34 +36,35 @@ class Login extends React.Component {
         return (
             <div className="content-login">
                 <div className="login-body">
-                        <div className="section-right" style={{backgroundImage: `url(${pic})`}}>
-                            <p>به پنل فروشگاه های زنجیره ای تونل خوش آمدید.</p>
+                    <div>
+                        <img src={logo} className="img-fluid" />
+                        <div className="col-md-12 mt-4">
+                            <div className="form-group">
+                                <input
+                                    onChange={(e) => this.setState({email: e.target.value})}
+                                    className="form-control" placeholder="ایمیل"
+                                    value={this.state.email}/>
+                            </div>
                         </div>
-                        <div className="section-left">
-                            <img src={logo} className="img-fluid" />
+                        <div className="col-md-12">
+                            <div className="form-group">
+                                <input
+                                    onChange={(e) => this.setState({password: e.target.value})}
+                                    className="form-control" type="password" placeholder="پسورد"
+                                    value={this.state.password}/>
+                            </div>
+                        </div>
+                        <button className="btn btn-info" type="submit"
+                                onClick={(e) => this._getToken(e)}>ورود
+                        </button>
+                    </div>
 
-                            <div className="col-md-12 mt-4">
-                                <div className="form-group">
-                                    <input
-                                        onChange={(e) => this.setState({email: e.target.value})}
-                                        className="form-control" placeholder="ایمیل"
-                                        value={this.state.email}/>
-                                </div>
-                            </div>
-                            <div className="col-md-12">
-                                <div className="form-group">
-                                    <input
-                                        onChange={(e) => this.setState({password: e.target.value})}
-                                        className="form-control" type="password" placeholder="پسورد"
-                                        value={this.state.password}/>
-                                </div>
-                            </div>
-                            <button className="btn btn-info" type="submit"
-                                    onClick={(e) => this._getToken(e)}>ورود
-                            </button>
-                        </div>
-                </div>
+                    </div>
+                <ParticlesBg num={300} type="circle" bg={true}  />
+
             </div>
+
+
         );
     }
 }

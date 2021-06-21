@@ -1,7 +1,5 @@
 .content-login{
-  background: #eb3349; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #eb3349, #f45c43); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #eb3349, #f45c43);
+  background-color: rgba(0,0,0,.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,21 +7,12 @@
   .login-body{
     display: flex;
     justify-content: center;
-    width: 50%;
-    height: 60%;
-    .section-right{
-      border-radius: 0 20px 20px 0;
-      width: 50%;
-      background-color: #172631;
-      background-repeat: no-repeat;
-      p{
-        font-size: 18px;
-        color: #fff;
-      }
-    }
+    width: 30%;
+    height: 50%;
+    background-color: #fff;
+    border-radius: 20px;
     .section-left{
       border-radius: 20px 0 0 20px;
-      width: 50%;
       background-color: #fff;
     }
   }
