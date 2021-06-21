@@ -1,4 +1,27 @@
 .content-login{
-  background: rgb(110,81,209);
-
+  background: #eb3349; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #eb3349, #f45c43); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #eb3349, #f45c43);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  .login-body{
+    display: flex;
+    justify-content: center;
+    width: 55%;
+    height: 60%;
+    .section-right{
+      width: 50%;
+      background-color: #172631;
+      p{
+        font-size: 18px;
+        color: #fff;
+      }
+    }
+    .section-left{
+      width: 70%;
+      background-color: #ffc107;
+    }
+  }
 }

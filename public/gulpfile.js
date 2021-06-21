@@ -1,97 +1,62 @@
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+var cssnano = require('gulp-cssnano');
 
-const {
-    src,
-    dest,
-    parallel,
-    series,
-    watch
-} = require('gulp');
+var paths = {
+    styles: {
+        src: 'assets/app/scss/app.scss',
+        dest: 'dest/css/'
+    },
+    scripts: {
+        src: 'assets/app/js/*.js',
+        dest: 'dest/scripts/'
+    }
+};
 
-// Load plugins
 
-const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
-const sass = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
-const cssnano = require('gulp-cssnano');
-const concat = require('gulp-concat');
-const clean = require('gulp-clean');
-const imagemin = require('gulp-imagemin');
-const changed = require('gulp-changed');
-const browsersync = require('browser-sync').create();
-
-// Clean assets
-
-function clear() {
-    return src('assets/*', {
-        read: false
-    })
-        .pipe(clean());
-}
-
-// JS function 
-
-function js() {
-    const source = 'assets/app/js/*.js';
-
-    return src(source)
-        .pipe(changed(source))
-        .pipe(concat('bundle.js'))
-        .pipe(uglify())
-        .pipe(rename({
-            extname: '.min.js'
-        }))
-        .pipe(dest('dest/js'))
-
-}
-
-// CSS function 
-
-function css() {
-    const source = 'assets/app/scss/app.scss';
-
-    return src(source)
-        .pipe(changed(source))
+/*
+ * Define our tasks using plain functions
+ */
+function styles() {
+    return gulp.src(paths.styles.src)
         .pipe(sass())
-        .pipe(autoprefixer({
-            overrideBrowserslist: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(rename({
-            extname: '.min.css'
-        }))
         .pipe(cssnano())
-        .pipe(dest('dest/css'))
+        // pass in options to the stream
+        .pipe(rename({
+            basename: 'main',
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest(paths.styles.dest));
 }
 
-// Optimize images
-
-function img() {
-    return src('assets/app/images/*')
-        .pipe(imagemin())
-        .pipe(dest('dest/img'));
+function scripts() {
+    return gulp.src(paths.scripts.src, { sourcemaps: true })
+        .pipe(uglify())
+        .pipe(concat('main.min.js'))
+        .pipe(gulp.dest(paths.scripts.dest));
 }
 
-// Watch files
-
-function watchFiles() {
-    watch('assets/app/scss/*', css);
-    watch('assets/app/js/*', js);
-    watch('assets/app/images/*', img);
+function watch() {
+    gulp.watch(paths.scripts.src, scripts);
+    gulp.watch(paths.styles.src, styles);
 }
 
-// BrowserSync
+/*
+ * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
+ */
+var build = gulp.series(gulp.parallel(styles, scripts));
 
-function browserSync() {
-    browsersync.init({
-        server: {
-            baseDir: './'
-        },
-        port: 3000
-    });
-}
-
-// Tasks to define the execution of the functions simultaneously or in series
-
-exports.watch = parallel(watchFiles);
-exports.default = series(clear, parallel(js, css, img));
+/*
+ * You can use CommonJS `exports` module notation to declare tasks
+ */
+exports.styles = styles;
+exports.scripts = scripts;
+exports.watch = watch;
+exports.build = build;
+/*
+ * Define default task that can be called by just running `gulp` from cli
+ */
+exports.default = build;
