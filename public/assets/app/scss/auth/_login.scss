@@ -5,23 +5,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   .login-body{
     display: flex;
     justify-content: center;
-    width: 55%;
+    width: 50%;
     height: 60%;
     .section-right{
+      border-radius: 0 20px 20px 0;
       width: 50%;
       background-color: #172631;
+      background-repeat: no-repeat;
       p{
         font-size: 18px;
         color: #fff;
       }
     }
     .section-left{
-      width: 70%;
-      background-color: #ffc107;
+      border-radius: 20px 0 0 20px;
+      width: 50%;
+      background-color: #fff;
     }
   }
 }

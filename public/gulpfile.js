@@ -1,62 +1,129 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var cssnano = require('gulp-cssnano');
+"use strict";
 
-var paths = {
-    styles: {
-        src: 'assets/app/scss/app.scss',
-        dest: 'dest/css/'
-    },
-    scripts: {
-        src: 'assets/app/js/*.js',
-        dest: 'dest/scripts/'
-    }
-};
+// Load plugins
+const cp = require("child_process");
+const gulp = require("gulp");
+const cssnano = require("gulp-cssnano");
+const del = require("del");
+const eslint = require("gulp-eslint");
+const imagemin = require("gulp-imagemin");
+const newer = require("gulp-newer");
+const plumber = require("gulp-plumber");
+const rename = require("gulp-rename");
+const sass = require("gulp-sass");
+const browsersync = require("browser-sync").create();
 
 
-/*
- * Define our tasks using plain functions
- */
-function styles() {
-    return gulp.src(paths.styles.src)
-        .pipe(sass())
+// BrowserSync
+function browserSync(done) {
+    browsersync.init({
+        server: {
+            baseDir: "./"
+        },
+        notify:false,
+        open: false
+    });
+    done();
+}
+// BrowserSync Reload
+function browserSyncReload(done) {
+    browsersync.reload();
+    done();
+}
+
+// Clean assets
+function clean() {
+    return del(["assets/"]);
+}
+
+// Optimize Images
+function images() {
+    return gulp
+        .src("assets/app/images/**/*")
+        .pipe(newer("assets/app/images"))
+        .pipe(
+            imagemin([
+                imagemin.gifsicle({ interlaced: true }),
+                imagemin.optipng({ optimizationLevel: 5 }),
+                imagemin.svgo({
+                    plugins: [
+                        {
+                            removeViewBox: false,
+                            collapseGroups: true
+                        }
+                    ]
+                })
+            ])
+        )
+        .pipe(gulp.dest("dest/img"));
+}
+
+function font() {
+    return gulp
+        .src("assets/app/fonts/*")
+        .pipe(gulp.dest("dest/fonts/"))
+}
+
+// CSS task
+function css() {
+    return gulp
+        .src("assets/app/scss/app.scss")
+        .pipe(plumber())
+        .pipe(sass({ outputStyle: "expanded" }))
+        .pipe(gulp.dest("dest/css/"))
+        .pipe(rename({ suffix: ".min" }))
         .pipe(cssnano())
-        // pass in options to the stream
-        .pipe(rename({
-            basename: 'main',
-            suffix: '.min'
-        }))
-        .pipe(gulp.dest(paths.styles.dest));
+        .pipe(gulp.dest("dest/css/"))
+        .pipe(browsersync.stream());
 }
 
+// Lint scripts
+function scriptsLint() {
+    return gulp
+        .src(["assets/app/js/**/*", "./gulpfile.js"])
+        .pipe(plumber())
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+}
+
+// Transpile, concatenate and minify scripts
 function scripts() {
-    return gulp.src(paths.scripts.src, { sourcemaps: true })
-        .pipe(uglify())
-        .pipe(concat('main.min.js'))
-        .pipe(gulp.dest(paths.scripts.dest));
+    return (
+        gulp
+            .src(["assets/app/js/**/*"])
+            .pipe(plumber())
+            // folder only, filename is specified in webpack config
+            .pipe(gulp.dest("dest/js/"))
+            .pipe(browsersync.stream())
+    );
 }
 
-function watch() {
-    gulp.watch(paths.scripts.src, scripts);
-    gulp.watch(paths.styles.src, styles);
+// Jekyll
+function jekyll() {
+    return cp.spawn("bundle", ["exec", "jekyll", "build"], { stdio: "inherit" });
 }
 
-/*
- * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
- */
-var build = gulp.series(gulp.parallel(styles, scripts));
+// Watch files
+function watchFiles() {
+    gulp.watch("assets/app/scss/**/*", css);
+    gulp.watch("assets/app/fonts/**/*", font);
+    gulp.watch("assets/app/js/**/*", gulp.series(scriptsLint, scripts));
+    gulp.watch("assets/app/images/**/*", images);
+}
 
-/*
- * You can use CommonJS `exports` module notation to declare tasks
- */
-exports.styles = styles;
-exports.scripts = scripts;
-exports.watch = watch;
+// define complex tasks
+const js = gulp.series(scriptsLint, scripts);
+const build = gulp.series(clean, gulp.parallel(css, images, font ,jekyll, js));
+const watch = gulp.parallel(watchFiles, browserSync);
+
+// export tasks
+exports.images = images;
+exports.font = font;
+exports.css = css;
+exports.js = js;
+exports.jekyll = jekyll;
+exports.clean = clean;
 exports.build = build;
-/*
- * Define default task that can be called by just running `gulp` from cli
- */
+exports.watch = watch;
 exports.default = build;

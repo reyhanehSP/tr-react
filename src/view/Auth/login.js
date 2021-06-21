@@ -2,6 +2,7 @@ import React from "react";
 import history from "../../history";
 import axios from "axios";
 import pic from "./login-pic.png";
+import logo from "./295.png"
 
 
 class Login extends React.Component {
@@ -39,6 +40,8 @@ class Login extends React.Component {
                             <p>به پنل فروشگاه های زنجیره ای تونل خوش آمدید.</p>
                         </div>
                         <div className="section-left">
+                            <img src={logo} className="img-fluid" />
+
                             <div className="col-md-12 mt-4">
                                 <div className="form-group">
                                     <input
