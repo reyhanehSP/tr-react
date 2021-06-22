@@ -1,0 +1,308 @@
+{
+  "sections": [
+    {
+      "title": {
+            "name": "مدیریت پیکربندی فروشگاه",
+            "ulClasses": "back-color",
+            "level-1": "level-1",
+            "urls": "users&&roles&&uploadExcel&&applicationInfo&&averageSellPrices&&transactions&&tags&&aboutUs",
+            "sub": {
+              "departments.index": {
+                "name": "مدیریت دپارتمان ها",
+                "icon": "fa fa-file",
+                "sub": ""
+              },
+              "users": [
+                {
+                  "name": "کاربران",
+                  "icon": "fa fa-users",
+                  "sub": [
+                    {
+                      "users.index": {
+                        "name": "همه کاربران",
+                        "icon": "fa fa-users",
+                        "sub": ""
+                      },
+                      "users.create": {
+                        "name": "افزودن کاربر",
+                        "icon": "fa fa-user-plus",
+                        "sub": ""
+                      }
+                    }
+                  ]
+                }
+              ],
+              "roles&&permissions": [
+                {
+                  "name": "نقش ها و مجوز ها",
+                  "icon": "fa fa-user",
+                  "sub": [
+                    {
+                      "roles": [
+                        {
+                          "name": "نقش ها",
+                          "icon": "fa fa-user",
+                          "sub": [
+                            {
+                              "roles.index": {
+                                "name": "همه‌ی نقش ها",
+                                "icon": "fa fa-user",
+                                "sub": ""
+                              }
+                            },
+                            {
+                              "roles.create": {
+                                "name": "افزودن نقش",
+                                "icon": "fa fa-user-plus",
+                                "sub": ""
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "permissions.index": {
+                        "name": "مجوز ها",
+                        "icon": "fa fa-user",
+                        "sub": ""
+                      }
+                    }
+                  ]
+                }
+              ],
+              "uploadExcel": {
+                "name": "آپلود فایل اکسل",
+                "icon": "fa fa-upload ",
+                "sub": ""
+              },
+              "applicationInfo.index": {
+                "name": "تغییرات اپلیکیشن",
+                "icon": "icon-mobile-application",
+                "sub": ""
+              },
+              "averageSellPrices": {
+                "name": "مدیریت میانگین فروش",
+                "icon": "icon-incentive",
+                "sub": [
+                  {
+                    "averageSellPrices.index": [
+                      {
+                        "name": "میانگین‌های فروش",
+                        "icon": "icon-incentive",
+                        "sub": ""
+                      },
+                      {
+                        "averageSellPrices.create": {
+                          "name": "محاسبه میانگین فروش",
+                          "icon": "fa fa-plus-circle",
+                          "sub": ""
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "tags": {
+                "name": "مدیریت تگ ها",
+                "icon": "icon-fees",
+                "sub": {
+                  "tags.index": {
+                    "name": "همه‌ی تگ ها",
+                    "icon": "icon-fees",
+                    "sub": ""
+                  }
+                }
+              },
+              "aboutUs": {
+                "name": "درباره تونل",
+                "icon": "fa fa-file",
+                "urls": "aboutUs&&contactUs&&checkout&&participationPlan&&document&&rules",
+                "sub": {
+                  "aboutUs": {
+                    "name": "درباره ما",
+                    "icon": "fa fa-file",
+                    "sub": ""
+                  }
+                }
+              },
+              "contactUs": {
+                "name": "ارتباط با ما",
+                "icon": "fa fa-compress",
+                "sub": ""
+              },
+              "checkout": {
+                "name": "تسویه حساب",
+                "icon": "fa fa-credit-card",
+                "sub": ""
+              },
+              "participationPlan": {
+                "name": "طرح مشارکت",
+                "icon": "fa fa-map",
+                "sub": ""
+              },
+              "document": {
+                "name": "نمونه اسناد",
+                "icon": "fa fa-file",
+                "sub": ""
+              },
+              "rules": {
+                "name": "قوانین و مقررات",
+                "icon": "fa fa-file",
+                "sub": ""
+              }
+            }
+          }
+    },
+    {
+      "title": {
+        "name": "مدیریت ",
+        "ulClasses": "back-color",
+        "level-1": "level-1",
+        "urls": "users&&roles&&uploadExcel&&applicationInfo&&averageSellPrices&&transactions&&tags&&aboutUs",
+        "sub": {
+          "departments.index": {
+            "name": "مدیریت دپارتمان ها",
+            "icon": "fa fa-file",
+            "sub": ""
+          },
+          "users": [
+            {
+              "name": "کاربران",
+              "icon": "fa fa-users",
+              "sub": [
+                {
+                  "users.index": {
+                    "name": "همه کاربران",
+                    "icon": "fa fa-users",
+                    "sub": ""
+                  },
+                  "users.create": {
+                    "name": "افزودن کاربر",
+                    "icon": "fa fa-user-plus",
+                    "sub": ""
+                  }
+                }
+              ]
+            }
+          ],
+          "roles&&permissions": [
+            {
+              "name": "نقش ها و مجوز ها",
+              "icon": "fa fa-user",
+              "sub": [
+                {
+                  "roles": [
+                    {
+                      "name": "نقش ها",
+                      "icon": "fa fa-user",
+                      "sub": [
+                        {
+                          "roles.index": {
+                            "name": "همه‌ی نقش ها",
+                            "icon": "fa fa-user",
+                            "sub": ""
+                          }
+                        },
+                        {
+                          "roles.create": {
+                            "name": "افزودن نقش",
+                            "icon": "fa fa-user-plus",
+                            "sub": ""
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "permissions.index": {
+                    "name": "مجوز ها",
+                    "icon": "fa fa-user",
+                    "sub": ""
+                  }
+                }
+              ]
+            }
+          ],
+          "uploadExcel": {
+            "name": "آپلود فایل اکسل",
+            "icon": "fa fa-upload ",
+            "sub": ""
+          },
+          "applicationInfo.index": {
+            "name": "تغییرات اپلیکیشن",
+            "icon": "icon-mobile-application",
+            "sub": ""
+          },
+          "averageSellPrices": {
+            "name": "مدیریت میانگین فروش",
+            "icon": "icon-incentive",
+            "sub": [
+              {
+                "averageSellPrices.index": [
+                  {
+                    "name": "میانگین‌های فروش",
+                    "icon": "icon-incentive",
+                    "sub": ""
+                  },
+                  {
+                    "averageSellPrices.create": {
+                      "name": "محاسبه میانگین فروش",
+                      "icon": "fa fa-plus-circle",
+                      "sub": ""
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "tags": {
+            "name": "مدیریت تگ ها",
+            "icon": "icon-fees",
+            "sub": {
+              "tags.index": {
+                "name": "همه‌ی تگ ها",
+                "icon": "icon-fees",
+                "sub": ""
+              }
+            }
+          },
+          "aboutUs": {
+            "name": "درباره تونل",
+            "icon": "fa fa-file",
+            "urls": "aboutUs&&contactUs&&checkout&&participationPlan&&document&&rules",
+            "sub": {
+              "aboutUs": {
+                "name": "درباره ما",
+                "icon": "fa fa-file",
+                "sub": ""
+              }
+            }
+          },
+          "contactUs": {
+            "name": "ارتباط با ما",
+            "icon": "fa fa-compress",
+            "sub": ""
+          },
+          "checkout": {
+            "name": "تسویه حساب",
+            "icon": "fa fa-credit-card",
+            "sub": ""
+          },
+          "participationPlan": {
+            "name": "طرح مشارکت",
+            "icon": "fa fa-map",
+            "sub": ""
+          },
+          "document": {
+            "name": "نمونه اسناد",
+            "icon": "fa fa-file",
+            "sub": ""
+          },
+          "rules": {
+            "name": "قوانین و مقررات",
+            "icon": "fa fa-file",
+            "sub": ""
+          }
+        }
+      }
+    }
+  ]
+}
