@@ -1,38 +1,33 @@
 import React from 'react';
+import data from "../../../config/sidebar";
+import SingleMenu from "./singleMenu";
+import MultiMenu from "./multiMenu";
 
 class Menu extends React.Component {
-
     render() {
-        console.log(this.props.listMenu)
         return (
-            <div className="row nav-org">
-                <div className="container-menu-desktop">
-                    <div className="wrap-header-mobile">
-                        <div className="btn-show-menu-mobile">
-					<span className="hamburger-box">
-					</span>
-                        </div>
-                    </div>
-                    <div className="wrap-main-nav">
-                        <div className="main-nav">
-                            <nav className="menu-desktop">
-                                <ul className="main-menu scroll-menu">
-                                    <li className="level-1">
-                                        <a href="/">داشبورد</a>
-                                    </li>
-                                    {this.props.listMenu.map((listMenu,index) => (
-                                        <li  key={index}>
-                                            <a href="">{listMenu.sections[index].title.name} </a>
-                                        </li>
-                                    ))
-                                    }
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
+            <div className="row">
+                <nav className="menu-desktop">
+                    <ul className="main-menu scroll-menu">
+                        <li className="level-1">
+                            <a href="/">داشبورد</a>
+                        </li>
+                        {data.map((obj , index) => (
+                            obj.title.sub === "" ?
+                                <SingleMenu name={obj.title.name}/>
+                                :
+                                <MultiMenu  key={index} name={obj.title.name} ulClasses={obj.title.ulClasses}
+                                           level-1={obj.title.level-1} urls={obj.title.urls}
+                                           sub={obj.title.sub}
+                                />
+
+                        ))
+                        }
+                    </ul>
+                </nav>
             </div>
         )
     }
 }
+
 export default Menu
