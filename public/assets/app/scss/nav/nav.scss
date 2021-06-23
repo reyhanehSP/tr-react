@@ -8,6 +8,7 @@
     margin-bottom: 0;
     padding-right: 20px;
     align-items: center;
+    position: relative;
     li{
         a{
           font-size: .8rem;
@@ -18,8 +19,13 @@
         }
     }
     ul{
+      position: absolute;
+      width: 100%;
       display: flex;
-      padding-right: 0;
+      padding-right: 20px;
+      right: 0;
+      top: 100%;
+      overflow-x: auto;
       li{
         a{
           font-size: .8rem;
@@ -31,9 +37,11 @@
 
       }
     }
-    .submenu{
-      visibility: hidden;
+    .close-submenu{
       display: none;
+    }
+    .open-submenu{
+      display: flex;
     }
   }
 }

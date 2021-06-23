@@ -10994,6 +10994,7 @@ a.text-second:hover, a.text-second:focus {
   margin-bottom: 0;
   padding-right: 20px;
   align-items: center;
+  position: relative;
 }
 
 .menu-desktop .main-menu li a {
@@ -11005,8 +11006,13 @@ a.text-second:hover, a.text-second:focus {
 }
 
 .menu-desktop .main-menu ul {
+  position: absolute;
+  width: 100%;
   display: flex;
-  padding-right: 0;
+  padding-right: 20px;
+  right: 0;
+  top: 100%;
+  overflow-x: auto;
 }
 
 .menu-desktop .main-menu ul li a {
@@ -11017,9 +11023,12 @@ a.text-second:hover, a.text-second:focus {
   padding: 5px 10px;
 }
 
-.menu-desktop .main-menu .submenu {
-  visibility: hidden;
+.menu-desktop .main-menu .close-submenu {
   display: none;
+}
+
+.menu-desktop .main-menu .open-submenu {
+  display: flex;
 }
 
 :root {
