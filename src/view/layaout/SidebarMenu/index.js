@@ -1,9 +1,18 @@
 import React from 'react';
 import data from "../../../config/sidebar";
-import SingleMenu from "./singleMenu";
-import MultiMenu from "./multiMenu";
 
 class Menu extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            activation : 'close'
+        };
+    }
+    subMenu = () =>(
+        this.setState({
+            activation : 'open'
+        })
+    );
     render() {
         return (
             <div className="row">
@@ -12,22 +21,30 @@ class Menu extends React.Component {
                         <li className="level-1">
                             <a href="/">داشبورد</a>
                         </li>
-                        {data.map((obj , index) => (
-                            obj.title.sub === "" ?
-                                <SingleMenu name={obj.title.name}/>
-                                :
-                                <MultiMenu  key={index} name={obj.title.name} ulClasses={obj.title.ulClasses}
-                                           level-1={obj.title.level-1} urls={obj.title.urls}
-                                           sub={obj.title.sub}
-                                />
-
-                        ))
-                        }
+                        <ul>{renderChild(data)}</ul>
                     </ul>
                 </nav>
             </div>
         )
     }
 }
+class Children extends React.Component {
+    render(){
+        return(
+            <li>
+                <a onClick={this.subMenu}
+                   className={this.props.children.level === 'level-1' ? this.props.children.level : ''}>{this.props.children.name}</a>
+                {console.log(this.props.children.children)}
+                {this.props.children.sub && (
+                    <ul className="submenu `${}`">{renderChild(this.props.children.sub)}</ul>
+                )}
+            </li>
+        )
+    }
+}
+
+
+
+const renderChild = item => item.map(it => <Children children={it} />);
 
 export default Menu

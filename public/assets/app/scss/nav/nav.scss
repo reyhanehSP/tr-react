@@ -1,0 +1,39 @@
+.menu-desktop{
+  background-color: $color-white;
+  box-shadow: 2px 2px 5px 5px rgba(0,0,0,.2);
+  width: 100%;
+  padding: 10px 15px;
+  .main-menu{
+    display: flex;
+    margin-bottom: 0;
+    padding-right: 20px;
+    align-items: center;
+    li{
+        a{
+          font-size: .8rem;
+          display: flex;
+          align-items: center;
+          height: 100%;
+          padding: 5px 10px;
+        }
+    }
+    ul{
+      display: flex;
+      padding-right: 0;
+      li{
+        a{
+          font-size: .8rem;
+          display: flex;
+          align-items: center;
+          height: 100%;
+          padding: 5px 10px;
+        }
+
+      }
+    }
+    .submenu{
+      visibility: hidden;
+      display: none;
+    }
+  }
+}

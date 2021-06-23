@@ -1,537 +1,530 @@
 [
   {
-    "title": {
-      "name": "مدیریت پیکربندی فروشگاه",
-      "ulClasses": "back-color",
-      "level-1": "level-1",
-      "urls": "users&&roles&&uploadExcel&&applicationInfo&&averageSellPrices&&transactions&&tags&&aboutUs",
-      "sub": [
-        {
-          "desc": "departments.index",
-          "name": "مدیریت دپارتمان ها",
-          "icon": "fa fa-file",
-          "sub": ""
-        },
-        {
-          "desc": "users",
-          "name": "کاربران",
-          "icon": "fa fa-users",
-          "sub": [
-            {
-                "desc": "users.index",
-                "name": "همه کاربران",
-                "icon": "fa fa-users",
-                "sub": ""
-              },
-               {
-              "desc": "users.create",
-                "name": "افزودن کاربر",
-                "icon": "fa fa-user-plus",
-                "sub": ""
-              }
-          ]
-        },
-        {
-          "desc": "roles&&permissions",
-          "name": "نقش ها و مجوز ها",
-          "icon": "fa fa-user",
-          "sub": [
-            {
-              "desc": "roles",
-              "name": "نقش ها",
-              "icon": "fa fa-user",
-              "sub": [
-                {
-                  "desc": "roles.index",
-                  "name": "همه‌ی نقش ها",
-                  "icon": "fa fa-user",
-                  "sub": ""
-                },
-                {
-                  "desc": "roles.create",
-                  "name": "افزودن نقش",
-                  "icon": "fa fa-user-plus",
-                  "sub": ""
-                }
-              ]
-            },
-            {
-              "desc": "permissions.index",
-              "name": "مجوز ها",
-              "icon": "fa fa-user",
-              "sub": ""
-            }
-          ]
-        },
-        {
-          "desc": "uploadExcel",
-          "name": "آپلود فایل اکسل",
-          "icon": "fa fa-upload ",
-          "sub": ""
-        },
-        {
-          "desc": "applicationInfo.index",
-          "name": "تغییرات اپلیکیشن",
-          "icon": "icon-mobile-application",
-          "sub": ""
-        },
-        {
-          "desc": "averageSellPrices",
-          "name": "مدیریت میانگین فروش",
-          "icon": "icon-incentive",
-          "sub": [
-            {
-              "desc": "averageSellPrices.index",
-              "name": "میانگین‌های فروش",
-              "icon": "icon-incentive",
-              "sub": ""
-            },
-            {
-              "desc": "averageSellPrices.create",
-              "name": "محاسبه میانگین فروش",
-              "icon": "fa fa-plus-circle",
-              "sub": ""
-            }
-          ]
-        },
-        {
-          "desc": "tags",
-          "name": "مدیریت تگ ها",
-          "icon": "icon-fees",
-          "sub": {
-            "tags.index": {
-              "name": "همه‌ی تگ ها",
-              "icon": "icon-fees",
-              "sub": ""
-            }
+    "name": "مدیریت پیکربندی فروشگاه",
+    "ulClasses": "back-color",
+    "level": "level-1",
+    "urls": "users&&roles&&uploadExcel&&applicationInfo&&averageSellPrices&&transactions&&tags&&aboutUs",
+    "sub": [
+      {
+        "desc": "departments.index",
+        "name": "مدیریت دپارتمان ها",
+        "icon": "fa fa-file",
+        "sub": ""
+      },
+      {
+        "desc": "users",
+        "name": "کاربران",
+        "icon": "fa fa-users",
+        "sub": [
+          {
+            "desc": "users.index",
+            "name": "همه کاربران",
+            "icon": "fa fa-users",
+            "sub": ""
+          },
+          {
+            "desc": "users.create",
+            "name": "افزودن کاربر",
+            "icon": "fa fa-user-plus",
+            "sub": ""
           }
-        },
-        {
-          "desc": "aboutUs",
-          "name": "درباره تونل",
-          "icon": "fa fa-file",
-          "urls": "aboutUs&&contactUs&&checkout&&participationPlan&&document&&rules",
-          "sub": {
-            "aboutUs": {
-              "name": "درباره ما",
-              "icon": "fa fa-file",
-              "sub": ""
-            }
-          }
-        },
-        {
-          "desc": "contactUs",
-          "name": "ارتباط با ما",
-          "icon": "fa fa-compress",
-          "sub": ""
-        },
-        {
-          "desc": "checkout",
-          "name": "تسویه حساب",
-          "icon": "fa fa-credit-card",
-          "sub": ""
-        },
-        {
-          "desc": "participationPlan",
-          "name": "طرح مشارکت",
-          "icon": "fa fa-map",
-          "sub": ""
-        },
-        {
-          "desc": "document",
-          "name": "نمونه اسناد",
-          "icon": "fa fa-file",
-          "sub": ""
-        },
-        {
-          "desc": "rules",
-          "name": "قوانین و مقررات",
-          "icon": "fa fa-file",
-          "sub": ""
-        }
-      ]
-    }
-  },
-  {
-    "title": {
-      "name": "مدیریت کالا و انبار",
-      "ulClasses": "back-color",
-      "level-1": "level-1",
-      "icon": "icon-warehouse-1",
-      "urls": "categories&&suppliers&&polls&&factors&&goodLists&&products.changeNewOff&&products.changePrice&&products.changeBuyPrice&&products.index&&products.add&&products.changeOff&&changePrices&&factors.v1&&attribute&&attribute.attributes&&attribute.attributeGroups&&attribute.colors",
-      "notUrls": "products.incomplete&&products.newProducts",
-      "sub" : [
-        {
-          "desc": "categories.index",
-          "name" : "گروه بندی",
-          "icon" : "fa fa-file",
-          "sub" : ""
-        },
-        {
-          "desc": "changePrices",
-          "name": "تغییر قیمت",
-          "icon": "fa fa-file",
-          "urls": "products.changeNewOff&&products.changePrice&&products.changeBuyPrice&&offMakers",
-          "notUrls": "products.incomplete&&products.newProducts",
-          "sub": [
-            {
-              "desc": "products.changeBuyPrice",
-              "name": "تغییر قیمت خرید",
-              "icon": "fa fa-money",
-              "sub": ""
-            },
-            {
-              "desc": "products.changePrice",
-              "name": "تغییر قیمت فروش",
-              "icon": "fa fa-money",
-              "sub": ""
-            },
-            {
-              "desc": "products.changeNewOff",
-              "name": "تغییر قیمت شگفتانه",
-              "icon": "fa fa-dollar",
-              "sub": ""
-            },
-            {
-              "desc": "offMakers",
-              "name": "مدیریت شگفتانه ساز ها",
-              "icon": "fa fa-shopping-cart",
-              "urls": "offMakers.index&&offMakers.create",
-              "sub": [
-                {
-                  "desc": "offMakers.index",
-                  "name": "همه شگفتانه ساز ها",
-                  "icon": "fa fa-money",
-                  "sub": ""
-                },
-                {
-                  "desc": "offMakers.create",
-                  "name": "ایجاد شگفتانه ساز",
-                  "icon": "fa fa-money",
-                  "sub": ""
-                }
-              ]
-            },
-            {
-              "desc": "offInOffs",
-              "name": "حراج",
-              "icon": "fa fa-shopping-cart",
-              "urls": "offInOffs.index&&offInOffs.create",
-              "sub": [
-                {
-                  "desc": "offInOffs.index",
-                  "name": "همه حراج ها",
-                  "icon": "fa fa-money",
-                  "sub": ""
-                },
-                {
-                  "desc": "offInOffs.create",
-                  "name": "ایجاد حراج",
-                  "icon": "fa fa-money",
-                  "sub": ""
-                }
-              ]
-            },
-            {
-              "desc": "changePrices",
-              "name": "درخواست تغییر قیمت",
-              "icon": "fa fa-shopping-cart",
-              "urls": "changePrices.index&&changePrices.create",
-              "sub": [
-                {
-                  "desc": "changePrices.index",
-                  "name": "همه درخواست تغییر قیمت ها",
-                  "icon": "fa fa-money",
-                  "sub": ""
-                },
-                {
-                  "desc": "changePrices.create",
-                  "name": "ایجاد درخواست تغییر قیمت",
-                  "icon": "fa fa-money",
-                  "sub": ""
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "desc": "products",
-          "name" : "کالاها",
-          "icon" : "fa fa-shopping-cart",
-          "urls" : "products.index&&products.add&&products.changeOff",
-          "notUrls" : "products&&products.changeNewOff&&products.changePrice&&products.changeBuyPrice&&products.incomplete&&products.newProducts",
-          "sub" : [
-            {
-              "desc": "products.index",
-              "name" : "همه‌ی کالاها",
-              "icon" : "fa fa-shopping-cart",
-              "sub" : ""
-            },
-            {
-              "desc": "products.add",
-              "name" : "افزودن کالا",
-              "icon" : "fa fa-cart-arrow-down",
-              "sub" : ""
-            },
-            {
-              "desc": "potentialProducts",
-              "name": "کالاهای بالقوه",
-              "icon": "fa fa-shopping-cart",
-              "urls": "potentialProducts.index&&potentialProducts.create&&potentialProducts.edit",
-              "sub": [
-                {
-                  "desc": "potentialProducts.index",
-                  "name": "همه‌ی کالاهای بالقوه",
-                  "icon": "fa fa-shopping-cart",
-                  "sub": ""
-                },
-                {
-                  "desc": "potentialProducts.create",
-                  "name": "افزودن کالا بالقوه",
-                  "icon": "fa fa-cart-arrow-down",
-                  "sub": ""
-                }
-              ]
-            },
-            {
-              "desc": "attribute.attributes",
-              "name" : "ویژگی ها",
-              "icon" : "fa fa-shopping-cart",
-              "urls" : "attribute.attributes.index&&attribute.attributes.create&&attribute.attributes.edit",
-              "sub" : [
-                {
-                  "desc": "attribute.attributes.index",
-                  "name" : "همه‌ی ویژگی ها",
-                  "icon" : "fa fa-shopping-cart",
-                  "sub" : ""
-                },
-                {
-                  "desc": "attribute.attributes.create",
-                  "name" : "افزودن ویژگی",
-                  "icon" : "fa fa-cart-arrow-down",
-                  "sub" : ""
-                }
-
-              ]
-
-            },
-            {
-              "desc" : "attribute.attributeGroups",
-              "name" : "گروه ویژگی ها",
-              "icon" : "fa fa-shopping-cart",
-              "urls" : "attribute.attributeGroups.index&&attribute.attributeGroups.create&&attribute.attributeGroups.edit",
-              "sub" : [
-                {
-                  "desc" : "attribute.attributeGroups.index",
-                  "name" : "همه‌ی گروه ویژگی ها",
-                  "icon" : "fa fa-shopping-cart",
-                  "sub" : ""
-                },
-                {
-                  "desc" : "attribute.attributeGroups.create",
-                  "name" : "افزودن گروه ویژگی",
-                  "icon" : "fa fa-cart-arrow-down",
-                  "sub" : ""
-                }
-              ]
-            },
-            {
-              "desc" : "attribute.colors",
-              "name" : "رنگ ها",
-              "icon" : "fa fa-shopping-cart",
-              "urls" : "attribute.colors.index&&attribute.colors.create&&attribute.colors.edit",
-              "sub" : [
-                {
-                  "desc" : "attribute.colors.index",
-                  "name" : "همه‌ی رنگ ها",
-                  "icon" : "fa fa-shopping-cart",
-                  "sub" : ""
-                },
-                {
-                  "desc" : "attribute.colors.create",
-                  "name" : "افزودن رنگ",
-                  "icon" : "fa fa-cart-arrow-down",
-                  "sub" : ""
-                }
-              ]
-            },
-            {
-              "desc" : "preProducts",
-              "name" : "کالاهای اولیه",
-              "icon" : "fa fa-shopping-cart",
-              "urls" : "preProducts.index&&preProducts.create&&preProducts.edit",
-              "sub" : [
-                {
-                  "desc" : "preProducts.index",
-                  "name" : "همه‌ی کالاهای اولیه",
-                  "icon" : "fa fa-shopping-cart",
-                  "sub" : ""
-                },
-                {
-                  "desc" : "preProducts.create",
-                  "name" : "افزودن کالای اولیه",
-                  "icon" : "fa fa-cart-arrow-down",
-                  "sub" : ""
-                }
-              ]
-            }
-              ]
-            },
-        {
-          "desc" : "suppliers",
-          "name" : "تامین کنندگان",
-          "icon" : "fa fa-truck",
-          "urls" : "suppliers&&supplierPayReceipt",
-          "sub" : [
-            {
-              "desc" : "suppliers.index",
-              "name" : " همه‌ی تامین کنندگان",
-              "icon" : "fa fa-truck",
-              "sub" : ""
-            },
-            {
-                "desc" : "suppliers.create",
-                "name" : "افزودن تامین کننده",
-                "icon" : "fa fa-plus-circle",
-                "sub" : ""
-            },
-            {
-              "desc" : "supplierPayReceipt",
-              "urls" : "supplierPayReceipt.index&&supplierPayReceipt.create",
-              "name" : "سند تامین کننده ها",
-              "icon" : "fa fa-plus-circle",
-              "sub" : [
-                {
-                  "desc" : "supplierPayReceipt.index",
-                  "name" : "همه اسناد تامین کننده",
-                  "icon" : "fa fa-plus-circle",
-                  "sub" : ""
-                },
-                {
-                  "desc" : "supplierPayReceipt.create",
-                  "name" : " افزودن سند تامین کننده",
-                  "icon" : "fa fa-plus-circle",
-                  "sub" : ""
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "desc": "polls",
-          "name" : "نظرسنجی ها",
-          "icon" : "fa fa-comments",
-          "sub" : [
-            {
-              "desc": "polls.index",
-              "name" : "آرشیو نظرسنجی‌ها",
-              "icon" : "fa fa-comments",
-              "sub" : ""
-            },
-            {
-                "desc": "polls.index",
-                "name" : "افزودن نظرسنجی",
-                "icon" : "fa fa-plus-circle",
-                "sub" : ""
-              },
-            {
-              "desc": "polls.multiCreate",
-              "name" : "افزودن گروهی نظرسنجی",
-              "icon" : "fa fa-plus-circle",
-              "sub" : ""
-            },
-            {
-                "desc": "polls.active",
-                "name" : "نظرسنجی های در جریان",
-                "icon" : "fa fa-comment",
-                "sub" : ""
-            }
-            ]
-        },
-        {
-            "desc": "factors.v1",
-            "name": "مدیریت فاکتور ها (جدید)",
-            "icon": "fa fa-tasks",
+        ]
+      },
+      {
+        "desc": "roles&&permissions",
+        "name": "نقش ها و مجوز ها",
+        "icon": "fa fa-user",
+        "sub": [
+          {
+            "desc": "roles",
+            "name": "نقش ها",
+            "icon": "fa fa-user",
             "sub": [
               {
-                "desc": "factors.v1.index",
-                "name": "همه‌ی فاکتور ها",
-                "icon": "fa fa-tasks",
+                "desc": "roles.index",
+                "name": "همه‌ی نقش ها",
+                "icon": "fa fa-user",
                 "sub": ""
               },
               {
-                "desc": "factors.v1.createOrder",
-                "name": "افزودن فاکتور",
-                "icon": "fa fa-plus-circle",
-                "sub": ""
-              },
-              {
-                "desc": "factors.v1.returned.index",
-                "name": "کالا های مرجوعی",
-                "icon": "fa fa-plus-circle",
+                "desc": "roles.create",
+                "name": "افزودن نقش",
+                "icon": "fa fa-user-plus",
                 "sub": ""
               }
             ]
           },
-        {
-          "desc": "goodLists",
-          "name" : "مدیریت لیست بار ها",
-          "icon" : "fa fa-tasks",
-          "urls" : "goodLists.index&&reports.goods-list",
-          "sub" : [
-            {
-              "desc": "goodLists.index",
-                "name" : "همه‌ی لیست بار ها",
-                "icon" : "fa fa-tasks",
-                "sub" : ""
-            },
-            {
-              "desc": "reports.goods-list",
-              "name" : "افزودن لیست بار",
-              "icon" : "fa fa-plus-circle",
-              "sub" : ""
-            }
-
-          ]
-        },
-        {
-          "desc": "goodLists.v1",
-          "name": "لیست بار جدید",
-          "icon": "fa fa-tasks",
-          "urls": "goodLists.v1.index",
-          "sub": [
-            {
-              "desc": "goodLists.v1.index",
-              "name": "همه‌ی لیست بار ها",
-              "icon": "fa fa-tasks",
-              "sub": ""
-            }
-          ]
-        },
-        {
-          "desc": "productShops",
-          "name" : "مدیریت متغیر فروشگاه ها",
-          "icon" : "fa fa-tasks",
-          "urls" : "productShops.index&&productShops.create",
-          "sub" : [
-            {
-              "desc": "productShops.index",
-              "name": "همه‌ی متغیر فروشگاه ها",
-              "icon": "fa fa-tasks",
-              "sub": ""
-            },
-            {
-              "desc": "productShops.create",
-              "name": "افزودن متغیر فروشگاه",
-              "icon": "fa fa-plus-circle",
-              "sub": ""
-            }
+          {
+            "desc": "permissions.index",
+            "name": "مجوز ها",
+            "icon": "fa fa-user",
+            "sub": ""
+          }
+        ]
+      },
+      {
+        "desc": "uploadExcel",
+        "name": "آپلود فایل اکسل",
+        "icon": "fa fa-upload ",
+        "sub": ""
+      },
+      {
+        "desc": "applicationInfo.index",
+        "name": "تغییرات اپلیکیشن",
+        "icon": "icon-mobile-application",
+        "sub": ""
+      },
+      {
+        "desc": "averageSellPrices",
+        "name": "مدیریت میانگین فروش",
+        "icon": "icon-incentive",
+        "sub": [
+          {
+            "desc": "averageSellPrices.index",
+            "name": "میانگین‌های فروش",
+            "icon": "icon-incentive",
+            "sub": ""
+          },
+          {
+            "desc": "averageSellPrices.create",
+            "name": "محاسبه میانگین فروش",
+            "icon": "fa fa-plus-circle",
+            "sub": ""
+          }
+        ]
+      },
+      {
+        "desc": "tags",
+        "name": "مدیریت تگ ها",
+        "icon": "icon-fees",
+        "sub": [
+          {
+            "desc": "tags.index",
+            "name": "همه‌ی تگ ها",
+            "icon": "icon-fees",
+            "sub": ""
+          }
+        ]
+      },
+      {
+        "desc": "aboutUs",
+        "name": "درباره تونل",
+        "icon": "fa fa-file",
+        "urls": "aboutUs&&contactUs&&checkout&&participationPlan&&document&&rules",
+        "sub": [
+          {
+            "desc": "aboutUs",
+            "name": "درباره ما",
+            "icon": "fa fa-file",
+            "sub": ""
+          }
+        ]
+      },
+      {
+        "desc": "contactUs",
+        "name": "ارتباط با ما",
+        "icon": "fa fa-compress",
+        "sub": ""
+      },
+      {
+        "desc": "checkout",
+        "name": "تسویه حساب",
+        "icon": "fa fa-credit-card",
+        "sub": ""
+      },
+      {
+        "desc": "participationPlan",
+        "name": "طرح مشارکت",
+        "icon": "fa fa-map",
+        "sub": ""
+      },
+      {
+        "desc": "document",
+        "name": "نمونه اسناد",
+        "icon": "fa fa-file",
+        "sub": ""
+      },
+      {
+        "desc": "rules",
+        "name": "قوانین و مقررات",
+        "icon": "fa fa-file",
+        "sub": ""
+      }
+    ]
+  },
+  {
+    "name": "مدیریت کالا و انبار",
+    "ulClasses": "back-color",
+    "level": "level-1",
+    "icon": "icon-warehouse-1",
+    "urls": "categories&&suppliers&&polls&&factors&&goodLists&&products.changeNewOff&&products.changePrice&&products.changeBuyPrice&&products.index&&products.add&&products.changeOff&&changePrices&&factors.v1&&attribute&&attribute.attributes&&attribute.attributeGroups&&attribute.colors",
+    "notUrls": "products.incomplete&&products.newProducts",
+    "sub": [
+      {
+        "desc": "categories.index",
+        "name": "گروه بندی",
+        "icon": "fa fa-file",
+        "sub": ""
+      },
+      {
+        "desc": "changePrices",
+        "name": "تغییر قیمت",
+        "icon": "fa fa-file",
+        "urls": "products.changeNewOff&&products.changePrice&&products.changeBuyPrice&&offMakers",
+        "notUrls": "products.incomplete&&products.newProducts",
+        "sub": [
+          {
+            "desc": "products.changeBuyPrice",
+            "name": "تغییر قیمت خرید",
+            "icon": "fa fa-money",
+            "sub": ""
+          },
+          {
+            "desc": "products.changePrice",
+            "name": "تغییر قیمت فروش",
+            "icon": "fa fa-money",
+            "sub": ""
+          },
+          {
+            "desc": "products.changeNewOff",
+            "name": "تغییر قیمت شگفتانه",
+            "icon": "fa fa-dollar",
+            "sub": ""
+          },
+          {
+            "desc": "offMakers",
+            "name": "مدیریت شگفتانه ساز ها",
+            "icon": "fa fa-shopping-cart",
+            "urls": "offMakers.index&&offMakers.create",
+            "sub": [
+              {
+                "desc": "offMakers.index",
+                "name": "همه شگفتانه ساز ها",
+                "icon": "fa fa-money",
+                "sub": ""
+              },
+              {
+                "desc": "offMakers.create",
+                "name": "ایجاد شگفتانه ساز",
+                "icon": "fa fa-money",
+                "sub": ""
+              }
             ]
-        }
-
-          ]
-        }
-
+          },
+          {
+            "desc": "offInOffs",
+            "name": "حراج",
+            "icon": "fa fa-shopping-cart",
+            "urls": "offInOffs.index&&offInOffs.create",
+            "sub": [
+              {
+                "desc": "offInOffs.index",
+                "name": "همه حراج ها",
+                "icon": "fa fa-money",
+                "sub": ""
+              },
+              {
+                "desc": "offInOffs.create",
+                "name": "ایجاد حراج",
+                "icon": "fa fa-money",
+                "sub": ""
+              }
+            ]
+          },
+          {
+            "desc": "changePrices",
+            "name": "درخواست تغییر قیمت",
+            "icon": "fa fa-shopping-cart",
+            "urls": "changePrices.index&&changePrices.create",
+            "sub": [
+              {
+                "desc": "changePrices.index",
+                "name": "همه درخواست تغییر قیمت ها",
+                "icon": "fa fa-money",
+                "sub": ""
+              },
+              {
+                "desc": "changePrices.create",
+                "name": "ایجاد درخواست تغییر قیمت",
+                "icon": "fa fa-money",
+                "sub": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "desc": "products",
+        "name": "کالاها",
+        "icon": "fa fa-shopping-cart",
+        "urls": "products.index&&products.add&&products.changeOff",
+        "notUrls": "products&&products.changeNewOff&&products.changePrice&&products.changeBuyPrice&&products.incomplete&&products.newProducts",
+        "sub": [
+          {
+            "desc": "products.index",
+            "name": "همه‌ی کالاها",
+            "icon": "fa fa-shopping-cart",
+            "sub": ""
+          },
+          {
+            "desc": "products.add",
+            "name": "افزودن کالا",
+            "icon": "fa fa-cart-arrow-down",
+            "sub": ""
+          },
+          {
+            "desc": "potentialProducts",
+            "name": "کالاهای بالقوه",
+            "icon": "fa fa-shopping-cart",
+            "urls": "potentialProducts.index&&potentialProducts.create&&potentialProducts.edit",
+            "sub": [
+              {
+                "desc": "potentialProducts.index",
+                "name": "همه‌ی کالاهای بالقوه",
+                "icon": "fa fa-shopping-cart",
+                "sub": ""
+              },
+              {
+                "desc": "potentialProducts.create",
+                "name": "افزودن کالا بالقوه",
+                "icon": "fa fa-cart-arrow-down",
+                "sub": ""
+              }
+            ]
+          },
+          {
+            "desc": "attribute.attributes",
+            "name": "ویژگی ها",
+            "icon": "fa fa-shopping-cart",
+            "urls": "attribute.attributes.index&&attribute.attributes.create&&attribute.attributes.edit",
+            "sub": [
+              {
+                "desc": "attribute.attributes.index",
+                "name": "همه‌ی ویژگی ها",
+                "icon": "fa fa-shopping-cart",
+                "sub": ""
+              },
+              {
+                "desc": "attribute.attributes.create",
+                "name": "افزودن ویژگی",
+                "icon": "fa fa-cart-arrow-down",
+                "sub": ""
+              }
+            ]
+          },
+          {
+            "desc": "attribute.attributeGroups",
+            "name": "گروه ویژگی ها",
+            "icon": "fa fa-shopping-cart",
+            "urls": "attribute.attributeGroups.index&&attribute.attributeGroups.create&&attribute.attributeGroups.edit",
+            "sub": [
+              {
+                "desc": "attribute.attributeGroups.index",
+                "name": "همه‌ی گروه ویژگی ها",
+                "icon": "fa fa-shopping-cart",
+                "sub": ""
+              },
+              {
+                "desc": "attribute.attributeGroups.create",
+                "name": "افزودن گروه ویژگی",
+                "icon": "fa fa-cart-arrow-down",
+                "sub": ""
+              }
+            ]
+          },
+          {
+            "desc": "attribute.colors",
+            "name": "رنگ ها",
+            "icon": "fa fa-shopping-cart",
+            "urls": "attribute.colors.index&&attribute.colors.create&&attribute.colors.edit",
+            "sub": [
+              {
+                "desc": "attribute.colors.index",
+                "name": "همه‌ی رنگ ها",
+                "icon": "fa fa-shopping-cart",
+                "sub": ""
+              },
+              {
+                "desc": "attribute.colors.create",
+                "name": "افزودن رنگ",
+                "icon": "fa fa-cart-arrow-down",
+                "sub": ""
+              }
+            ]
+          },
+          {
+            "desc": "preProducts",
+            "name": "کالاهای اولیه",
+            "icon": "fa fa-shopping-cart",
+            "urls": "preProducts.index&&preProducts.create&&preProducts.edit",
+            "sub": [
+              {
+                "desc": "preProducts.index",
+                "name": "همه‌ی کالاهای اولیه",
+                "icon": "fa fa-shopping-cart",
+                "sub": ""
+              },
+              {
+                "desc": "preProducts.create",
+                "name": "افزودن کالای اولیه",
+                "icon": "fa fa-cart-arrow-down",
+                "sub": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "desc": "suppliers",
+        "name": "تامین کنندگان",
+        "icon": "fa fa-truck",
+        "urls": "suppliers&&supplierPayReceipt",
+        "sub": [
+          {
+            "desc": "suppliers.index",
+            "name": " همه‌ی تامین کنندگان",
+            "icon": "fa fa-truck",
+            "sub": ""
+          },
+          {
+            "desc": "suppliers.create",
+            "name": "افزودن تامین کننده",
+            "icon": "fa fa-plus-circle",
+            "sub": ""
+          },
+          {
+            "desc": "supplierPayReceipt",
+            "urls": "supplierPayReceipt.index&&supplierPayReceipt.create",
+            "name": "سند تامین کننده ها",
+            "icon": "fa fa-plus-circle",
+            "sub": [
+              {
+                "desc": "supplierPayReceipt.index",
+                "name": "همه اسناد تامین کننده",
+                "icon": "fa fa-plus-circle",
+                "sub": ""
+              },
+              {
+                "desc": "supplierPayReceipt.create",
+                "name": " افزودن سند تامین کننده",
+                "icon": "fa fa-plus-circle",
+                "sub": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "desc": "polls",
+        "name": "نظرسنجی ها",
+        "icon": "fa fa-comments",
+        "sub": [
+          {
+            "desc": "polls.index",
+            "name": "آرشیو نظرسنجی‌ها",
+            "icon": "fa fa-comments",
+            "sub": ""
+          },
+          {
+            "desc": "polls.index",
+            "name": "افزودن نظرسنجی",
+            "icon": "fa fa-plus-circle",
+            "sub": ""
+          },
+          {
+            "desc": "polls.multiCreate",
+            "name": "افزودن گروهی نظرسنجی",
+            "icon": "fa fa-plus-circle",
+            "sub": ""
+          },
+          {
+            "desc": "polls.active",
+            "name": "نظرسنجی های در جریان",
+            "icon": "fa fa-comment",
+            "sub": ""
+          }
+        ]
+      },
+      {
+        "desc": "factors.v1",
+        "name": "مدیریت فاکتور ها (جدید)",
+        "icon": "fa fa-tasks",
+        "sub": [
+          {
+            "desc": "factors.v1.index",
+            "name": "همه‌ی فاکتور ها",
+            "icon": "fa fa-tasks",
+            "sub": ""
+          },
+          {
+            "desc": "factors.v1.createOrder",
+            "name": "افزودن فاکتور",
+            "icon": "fa fa-plus-circle",
+            "sub": ""
+          },
+          {
+            "desc": "factors.v1.returned.index",
+            "name": "کالا های مرجوعی",
+            "icon": "fa fa-plus-circle",
+            "sub": ""
+          }
+        ]
+      },
+      {
+        "desc": "goodLists",
+        "name": "مدیریت لیست بار ها",
+        "icon": "fa fa-tasks",
+        "urls": "goodLists.index&&reports.goods-list",
+        "sub": [
+          {
+            "desc": "goodLists.index",
+            "name": "همه‌ی لیست بار ها",
+            "icon": "fa fa-tasks",
+            "sub": ""
+          },
+          {
+            "desc": "reports.goods-list",
+            "name": "افزودن لیست بار",
+            "icon": "fa fa-plus-circle",
+            "sub": ""
+          }
+        ]
+      },
+      {
+        "desc": "goodLists.v1",
+        "name": "لیست بار جدید",
+        "icon": "fa fa-tasks",
+        "urls": "goodLists.v1.index",
+        "sub": [
+          {
+            "desc": "goodLists.v1.index",
+            "name": "همه‌ی لیست بار ها",
+            "icon": "fa fa-tasks",
+            "sub": ""
+          }
+        ]
+      },
+      {
+        "desc": "productShops",
+        "name": "مدیریت متغیر فروشگاه ها",
+        "icon": "fa fa-tasks",
+        "urls": "productShops.index&&productShops.create",
+        "sub": [
+          {
+            "desc": "productShops.index",
+            "name": "همه‌ی متغیر فروشگاه ها",
+            "icon": "fa fa-tasks",
+            "sub": ""
+          },
+          {
+            "desc": "productShops.create",
+            "name": "افزودن متغیر فروشگاه",
+            "icon": "fa fa-plus-circle",
+            "sub": ""
+          }
+        ]
+      }
+    ]
   }
 ]
 
