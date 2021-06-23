@@ -2,25 +2,22 @@ import React from "react";
 import SingleMenu from "./singleMenu";
 
 class MultiMenu extends React.Component {
-
     render() {
-        console.log(this.props.sub)
         return (
-            <div>
+
                 <li>{this.props.name}
-                    <ul>
-                        <li>{this.props.sub.map((sub , index) => (
-                                sub.sub === "" ?
-                                    <SingleMenu name={sub.name}/>
-                                    :
-                                    <li>{
-                                        sub.name
-                                    }</li>
+                    {this.props.sub === "" ?  <SingleMenu name={this.sub.name}/> :
+                        {this.props.sub.map((sub) => (
+                                <ul>
+
+                                        <MultiMenu sub={sub.sub} />
+                                </ul>
                             )
-                        )}</li>
-                    </ul>
+                        )}
+                    }
+
                 </li>
-            </div>
+
 
         )
     }
