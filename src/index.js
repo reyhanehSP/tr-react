@@ -8,13 +8,13 @@ import Routes from './boot/Router';
 import axios from "axios";
 
 let token;
-let tchat_token = localStorage.getItem("token");
+let panel_token = localStorage.getItem("token");
 
-if (tchat_token) {
+if (panel_token) {
     token = localStorage.getItem("token");
 }
 //
-axios.defaults.baseURL = "http://localhost:8000/";
+axios.defaults.baseURL = "https://panel.tnl.ir";
 
 if (token) {
     axios.defaults.headers['Authorization'] = `${token}`;

@@ -14,17 +14,17 @@ class Login extends React.Component {
     _getToken() {
         axios({
             method: 'post',
-            url: `/api/tchat/v1/auth/login`,
+            url: `/api/v2/auth/login`,
             data: {
                 email: this.state.email,
                 password: this.state.password,
             }
         }).then((response) => {
             if (response.status === 200) {
-                if (response.data.data.tchat_token === null) {
+                if (response.data.data.panel_token === null) {
                     history.push('/login', {email: this.state.email});
                 } else {
-                    localStorage.setItem("token", response.data.data.tchat_token);
+                    localStorage.setItem("token", response.data.data.panel_token);
                     localStorage.setItem("user", response.data.data.user);
                     history.push('/home');
                 }

@@ -3,6 +3,10 @@ import data from "../../../config/sidebar";
 
 class Menu extends React.Component {
 
+    logout = () => {
+        localStorage.clear();
+        window.location.href = '/login';
+    };
     render() {
         return (
             <div className="row">
@@ -11,8 +15,9 @@ class Menu extends React.Component {
                         <li className="level-1">
                             <a href="/">داشبورد</a>
                         </li>
-                        {renderChild(data)}
+                        {renderChild([data.data.routes])}
                     </ul>
+                    <span> <span onClick={this.logout}>خروج</span></span>
                 </nav>
             </div>
         )
@@ -45,7 +50,6 @@ class Children extends React.Component {
             <li>
                 <a onClick={this.subMenu}
                    className={this.props.children.level === 'level-1' ? this.props.children.level : ''}>{this.props.children.name}</a>
-                {console.log(this.props.children.children)}
                 {this.props.children.sub && (
                     <ul ref={this.stateMenu} className={this.state.activation}>{renderChild(this.props.children.sub)}</ul>
                 )}
@@ -55,6 +59,7 @@ class Children extends React.Component {
 }
 
 
-const renderChild = item => item.map(it => <Children children={it}/>);
+const renderChild = (item) => item.flatMap((it , i) => <Children children={it} key={i}/>);
+
 
 export default Menu
