@@ -1,0 +1,71 @@
+@font-face {
+  font-family:'sans';
+  src:url('../fonts/IRANSans/IRANSansWeb_Light.woff') format('woff'),
+  url('../fonts/IRANSans/IRANSansWeb_Light.eot') format('eot'),
+  url('../fonts/IRANSans/IRANSansWeb_Light.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/IRANSans/IRANSansWeb_Light.ttf') format('truetype');
+  font-weight:normal;
+  font-style:normal;
+  font-variant:normal;
+}
+@font-face {
+  font-family:'sansMedium';
+  src:url('../fonts/IRANSansMedium/IRANSansWeb_Medium.woff') format('woff'),
+  url('../fonts/IRANSansMedium/IRANSansWeb_Medium.eot') format('eot'),
+  url('../fonts/IRANSansMedium/IRANSansWeb_Medium.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/IRANSansMedium/IRANSansWeb_Medium.ttf') format('truetype');
+  font-weight:bold;
+}
+@font-face {
+  font-family:'sansBold';
+  src:url('../fonts/IRANSansBold/IRANSansWeb_Bold.woff') format('woff'),
+  url('../fonts/IRANSansBold/IRANSansWeb_Bold.eot') format('eot'),
+  url('../fonts/IRANSansBold/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/IRANSansBold/IRANSansWeb_Bold.ttf') format('truetype');
+  font-weight:bold;
+}
+@font-face {
+  font-family: B_Yekan;
+  src:url('../fonts/B_Yekan/Yekan.ttf') format('truetype');
+  font-weight: normal;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px !important;
+  font-family:sans !important;
+  direction: rtl;
+  background-color: #f2f3fb !important;
+}
+ul{
+  list-style: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+a{
+  color: #111 !important;
+  text-decoration: none !important;
+}
+
+#root{
+  height: 100%;
+}
+.button-salmon{
+  border: 1px solid $color-salmon;
+  background: none;
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 6px;
+  box-shadow: 0 .25rem .55rem rgb(226, 190, 182);
+}
+.button{
+  transition: all .2s ease-out;
+  border-radius: .2rem;
+}
+.button:not(:disabled):hover {
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+.button-salmon:not(:disabled):active, .button-salmon:not(:disabled):focus, .button-salmon:not(:disabled):hover {
+  box-shadow: 0 .22rem .525rem rgba(219, 173, 163,.4),0 .0625rem .385rem rgba(219, 173, 163,.4);
+}

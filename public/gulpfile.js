@@ -11,6 +11,7 @@ const newer = require("gulp-newer");
 const plumber = require("gulp-plumber");
 const rename = require("gulp-rename");
 const sass = require("gulp-sass");
+const concat = require('gulp-concat');
 const browsersync = require("browser-sync").create();
 
 
@@ -67,12 +68,12 @@ function font() {
 // CSS task
 function css() {
     return gulp
-        .src("assets/app/scss/app.scss")
+        .src(["assets/app/scss/app.scss", "../node_modules/bootstrap/dist/css/bootstrap.css"])
         .pipe(plumber())
         .pipe(sass({ outputStyle: "expanded" }))
-        .pipe(gulp.dest("dest/css/"))
         .pipe(rename({ suffix: ".min" }))
         .pipe(cssnano())
+        .pipe(concat('./core.min.css'))
         .pipe(gulp.dest("dest/css/"))
         .pipe(browsersync.stream());
 }
