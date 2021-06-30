@@ -74,7 +74,7 @@ class Children extends React.Component {
         this.stateLi = React.createRef()
     }
     subMenu = (e) => {
-    console.log(this.state.activation_li)
+    console.log(this.state.activation_li);
         if(this.state.activation_li == 'de-active'){
             this.setState({
                 activation_li : 'active',
