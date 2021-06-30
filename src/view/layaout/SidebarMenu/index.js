@@ -5,12 +5,10 @@ import logo from "./150-150.png";
 
 
 class Menu extends React.Component {
-
     logout = () => {
         localStorage.clear();
         window.location.href = '/login';
     };
-
     render() {
         return (
             <header className="header">
@@ -72,39 +70,28 @@ class Children extends React.Component {
         super(props);
         this.state = {
             activation_li : 'de-active',
-            activation_ul: 'close-submenu'
         };
+        this.stateLi = React.createRef()
     }
-
-    subMenu = () => {
-
-        if (this.state.activation_li === 'active') {
-            this.setState({
-                activation_li : 'de-active',
-                activation_ul: 'close-submenu'
-            });
-        } else {
+    subMenu = (e) => {
+    console.log(this.state.activation_li)
+        if(this.state.activation_li == 'de-active'){
             this.setState({
                 activation_li : 'active',
-                activation_ul: 'open-submenu'
             });
-
         }
     };
-
     render() {
         return (
-            <li onClick={this.subMenu} className={this.state.activation_li}>
-                <a>{this.props.children.name}</a>
+            <li ref={this.stateLi} className={this.state.activation_li} key={this.props.key}>
+                <a onClick={this.subMenu}>{this.props.children.name}</a>
                 {this.props.children.sub && (
-                    <ul className={this.state.activation_ul}>{renderChild(this.props.children.sub)}</ul>
+                    <ul className={this.state.activation_li=== 'active' ? 'open-submenu' : 'close-submenu'}>{renderChild(this.props.children.sub)}</ul>
                 )}
             </li>
         )
     }
 }
-
-const renderChild = (item) => Object.keys(item).map((it) => <Children children={item[it]}/>);
-
+const renderChild = (item) => Object.keys(item).map((it , index) => <Children key={index} children={item[it]}/>);
 
 export default Menu
