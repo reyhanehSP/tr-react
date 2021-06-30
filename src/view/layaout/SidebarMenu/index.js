@@ -71,42 +71,38 @@ class Children extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activation: 'close-submenu',
-            activation_li : 'de-active'
+            activation_li : 'de-active',
+            activation_ul: 'close-submenu'
         };
-        this.stateMenu = React.createRef();
     }
 
-    subMenu = (e) => {
-        console.log(e.target);
-        if(this.state.activation_li === 'de-active' && this.state.activation === 'close-submenu'){
-            this.setState({
-                activation: 'open-submenu',
-                activation_li : 'active'
-            })
-        }
-        else{
-            this.setState({
-                activation: 'close-submenu',
-                activation_li : 'de-active'
-            })
-        }
+    subMenu = () => {
 
+        if (this.state.activation_li === 'active') {
+            this.setState({
+                activation_li : 'de-active',
+                activation_ul: 'close-submenu'
+            });
+        } else {
+            this.setState({
+                activation_li : 'active',
+                activation_ul: 'open-submenu'
+            });
+
+        }
     };
 
     render() {
         return (
-            <li onClick={this.subMenu}  className={this.state.activation_li}>
+            <li onClick={this.subMenu} className={this.state.activation_li}>
                 <a>{this.props.children.name}</a>
                 {this.props.children.sub && (
-                    <ul ref={this.stateMenu} className={this.state.activation}>{renderChild(this.props.children.sub)}</ul>
-
+                    <ul className={this.state.activation_ul}>{renderChild(this.props.children.sub)}</ul>
                 )}
             </li>
         )
     }
 }
-
 
 const renderChild = (item) => Object.keys(item).map((it) => <Children children={item[it]}/>);
 
