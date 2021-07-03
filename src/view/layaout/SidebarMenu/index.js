@@ -71,21 +71,19 @@ class Children extends React.Component {
         super(props);
         this.state = {
             isOpen: [this.props.id, false],
-            isActive : false
+            isActive: false
         };
         this.stateLi = React.createRef();
     }
 
     subMenu = () => {
         let indexNav = this.state.isOpen[0];
-        let valueNav = this.state.isOpen[1];
-        if(valueNav == false){
-            this.setState({
-                isOpen: [indexNav, true]
-            });
-        }
+        console.log(this.stateLi.current.getAttribute('liKeys'))
         this.setState({
-            isOpen: [this.props.id , false],
+            isOpen :[indexNav , true]
+        });
+        this.setState({
+            isOpen: [this.props.id, false],
         })
 
     };
