@@ -9,6 +9,7 @@ class Menu extends React.Component {
         localStorage.clear();
         window.location.href = '/login';
     };
+
     render() {
         return (
             <header className="header">
@@ -69,29 +70,41 @@ class Children extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activation_li : 'de-active',
+            isOpen: [this.props.id, false],
+            isActive : false
         };
-        this.stateLi = React.createRef()
+        this.stateLi = React.createRef();
     }
-    subMenu = (e) => {
-    console.log(this.state.activation_li);
-        if(this.state.activation_li == 'de-active'){
+
+    subMenu = () => {
+        let indexNav = this.state.isOpen[0];
+        let valueNav = this.state.isOpen[1];
+        if(valueNav == false){
             this.setState({
-                activation_li : 'active',
+                isOpen: [indexNav, true]
             });
         }
+        this.setState({
+            isOpen: [this.props.id , false],
+        })
+
     };
+
     render() {
         return (
-            <li ref={this.stateLi} className={this.state.activation_li} key={this.props.key}>
+            <li ref={this.stateLi} id={this.props.id} liKeys={this.state.isOpen}>
+
                 <a onClick={this.subMenu}>{this.props.children.name}</a>
+
                 {this.props.children.sub && (
-                    <ul className={this.state.activation_li=== 'active' ? 'open-submenu' : 'close-submenu'}>{renderChild(this.props.children.sub)}</ul>
+                    <ul isOpen={this.state.isOpen}
+                        className={this.state.isOpen[1] === true ? 'open-submenu' : 'close-submenu'}>{renderChild(this.props.children.sub)}</ul>
                 )}
             </li>
         )
     }
 }
-const renderChild = (item) => Object.keys(item).map((it , index) => <Children key={index} children={item[it]}/>);
+
+const renderChild = (item) => Object.keys(item).map((it, index) => <Children id={index} children={item[it]}/>);
 
 export default Menu
