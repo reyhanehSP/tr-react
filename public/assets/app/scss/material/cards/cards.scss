@@ -1,0 +1,13 @@
+.card {
+  box-shadow: 0 .46875rem 2.1875rem rgba(59,62,102,.03),0 .9375rem 1.40625rem rgba(59,62,102,.03),0 .25rem .53125rem rgba(59,62,102,.05),0 .125rem .1875rem rgba(59,62,102,.03);
+}
+.align-box-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.d-50 {
+  height: 50px !important;
+  line-height: 50px !important;
+  width: 50px !important;
+}

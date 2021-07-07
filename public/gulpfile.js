@@ -10,7 +10,7 @@ const imagemin = require("gulp-imagemin");
 const newer = require("gulp-newer");
 const plumber = require("gulp-plumber");
 const rename = require("gulp-rename");
-const sass = require("gulp-sass");
+var sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
 const browsersync = require("browser-sync").create();
 

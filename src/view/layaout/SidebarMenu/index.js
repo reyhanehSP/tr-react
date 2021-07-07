@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import data from "../../../config/sidebar";
 import logo from "./150-150.png";
 
@@ -71,40 +71,26 @@ class Children extends React.Component {
         super(props);
         this.state = {
             isOpen: [this.props.id, false],
+            activeId: null,
             isActive : false
         };
-        this.stateLi = React.createRef();
     }
-
-    subMenu = () => {
-        let indexNav = this.state.isOpen[0];
-        let valueNav = this.state.isOpen[1];
-        if(valueNav == false){
-            this.setState({
-                isOpen: [indexNav, true]
-            });
-        }
-        this.setState({
-            isOpen: [this.props.id , false],
-        })
-
+    subMenu = (id) => {
+        this.setState({isActive : true })
     };
-
     render() {
         return (
-            <li ref={this.stateLi} id={this.props.id} liKeys={this.state.isOpen}>
+                <li url ={this.props.url} liKeys={this.state.isOpen}>
+                    <a  onClick={this.subMenu.bind(this)}>{this.props.children.name}</a>
+                    {this.props.children.sub && (
+                        <ul className={this.state.isActive ? 'open-submenu' : 'close-submenu'}>{renderChild(this.props.children.sub)}</ul>
+                    )}
+                </li>
 
-                <a onClick={this.subMenu}>{this.props.children.name}</a>
-
-                {this.props.children.sub && (
-                    <ul isOpen={this.state.isOpen}
-                        className={this.state.isOpen[1] === true ? 'open-submenu' : 'close-submenu'}>{renderChild(this.props.children.sub)}</ul>
-                )}
-            </li>
         )
     }
 }
 
-const renderChild = (item) => Object.keys(item).map((it, index) => <Children id={index} children={item[it]}/>);
+const renderChild = (item) => Object.keys(item).map((it, index) => <Children url={it} id={index} children={item[it]}/>);
 
 export default Menu

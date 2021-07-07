@@ -50,6 +50,7 @@ a{
 #root{
   height: 100%;
 }
+
 .button-salmon{
   border: 1px solid $color-salmon;
   background: none;
@@ -68,4 +69,35 @@ a{
 }
 .button-salmon:not(:disabled):active, .button-salmon:not(:disabled):focus, .button-salmon:not(:disabled):hover {
   box-shadow: 0 .22rem .525rem rgba(219, 173, 163,.4),0 .0625rem .385rem rgba(219, 173, 163,.4);
+}
+
+// fonts
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+.font-size-xl {
+  font-size: 1.425rem;
+}
+.font-base{
+  font-size: .9rem;
+}
+.font-large{
+  font-size: 1.8rem;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+// margin
+
+.mr-auto{
+  margin-right: auto;
+}
+
+// width
+.max-width-70{
+  max-width: 70%;
 }

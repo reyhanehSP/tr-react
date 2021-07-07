@@ -14,7 +14,7 @@ if (panel_token) {
     token = localStorage.getItem("token");
 }
 //
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "http://localhost:8000/";
 
 if (token) {
     axios.defaults.headers['Authorization'] = `${token}`;
