@@ -35,7 +35,7 @@ body {
   font-size: 14px !important;
   font-family:sans !important;
   direction: rtl;
-  background-color: #f2f3fb !important;
+  background-color: #eeeff8 !important;
 }
 ul{
   list-style: none;
@@ -51,25 +51,6 @@ a{
   height: 100%;
 }
 
-.button-salmon{
-  border: 1px solid $color-salmon;
-  background: none;
-  display: inline-block;
-  padding: 6px 20px;
-  border-radius: 6px;
-  box-shadow: 0 .25rem .55rem rgb(226, 190, 182);
-}
-.button{
-  transition: all .2s ease-out;
-  border-radius: .2rem;
-}
-.button:not(:disabled):hover {
-  -webkit-transform: translateY(-2px);
-  transform: translateY(-2px);
-}
-.button-salmon:not(:disabled):active, .button-salmon:not(:disabled):focus, .button-salmon:not(:disabled):hover {
-  box-shadow: 0 .22rem .525rem rgba(219, 173, 163,.4),0 .0625rem .385rem rgba(219, 173, 163,.4);
-}
 
 // fonts
 
@@ -100,4 +81,15 @@ a{
 // width
 .max-width-70{
   max-width: 70%;
+}
+legend{
+  float: unset !important;
+}
+hr{
+  opacity: unset !important;
+}
+.makeStyles-root-1 {
+  .MuiTextField-root{
+    margin-right: 0 !important;
+  }
 }

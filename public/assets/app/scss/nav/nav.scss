@@ -8,17 +8,17 @@
   }
 
   #flip-calendar {
-    height: 40px;
+    height: 35px;
     overflow: hidden;
-    line-height: 40px;
+    line-height: 35px;
     transition: all 8s ease;
   }
 
   #flip-calendar > div > div {
-    color: #000;
+    color: #fff;
     padding: 4px 12px;
-    height: 45px;
-    margin-bottom: 30px;
+    height: 40px;
+    margin-bottom: 25px;
     display: inline-block;
     transition: all 8s ease;
 
@@ -57,34 +57,39 @@
   }
 }
 .header{
-  background-color: #3b3e66;
+  background-color: #4c5782;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
   .top-header{
-    padding-top: 10px;
-    .logo-header{
-      height: 40px;
-    }
+    padding: 3px 0;
+    background-color: #3d4977;
+    display: flex;
+    align-items: center;
     .section-one{
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
   }
+  .logo-header{
+    height: 38px;
+    margin-left: 15px;
+  }
 }
 .menu-desktop{
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #eee;
   .main-menu{
     width: 100%;
     display: flex;
     margin-bottom: 0;
     align-items: center;
     position: relative;
-    padding: 10px 15px;
+    padding: 12px 15px;
     > li{
          a{
-           color: hsla(0,0%,100%,.8) !important;
+           color: hsla(0,0%,100%,1) !important;
           font-size: .83rem;
           display: flex;
           align-items: center;
@@ -112,7 +117,6 @@
           height: 100%;
           padding: 5px 10px;
         }
-
       }
     }
     .close-submenu{
@@ -123,6 +127,7 @@
     }
   }
   .logout-section{
+    background-color: $color-white;
     position: absolute;
     left: 15px;
   }

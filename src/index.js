@@ -4,7 +4,6 @@ import {Router} from "react-router-dom";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import history from "./history";
-import Routes from './boot/Router';
 import axios from "axios";
 
 let token;
@@ -23,9 +22,7 @@ ReactDOM.render(
     <Router history={history}>
         <React.StrictMode>
             <React.Fragment>
-                <Routes>
                     <App/>
-                </Routes>
             </React.Fragment>
         </React.StrictMode>
     </Router>,

@@ -68,7 +68,7 @@ function font() {
 // CSS task
 function css() {
     return gulp
-        .src(["assets/app/scss/app.scss", "../node_modules/bootstrap/dist/css/bootstrap.css"])
+        .src(["assets/app/scss/app.scss", "../node_modules/bootstrap/dist/css/bootstrap.rtl.css"])
         .pipe(plumber())
         .pipe(sass({ outputStyle: "expanded" }))
         .pipe(rename({ suffix: ".min" }))
