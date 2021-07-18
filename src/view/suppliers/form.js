@@ -47,7 +47,7 @@ export default function SupplierEdit() {
 
     const handleselectedFile = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
-        console.log(fileInput.current)
+        console.log(fileInput.current.files)
     };
 
     const [values, setValues] = React.useState({
