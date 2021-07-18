@@ -1,7 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React , { useState } from 'react';
+import {Link} from 'react-router-dom';
 import data from "../../../config/sidebar";
 import logo from "./150-150.png";
+import IconButton from '@material-ui/core/IconButton';
+import ExitToApp from '@material-ui/icons/ExitToApp';
+import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
+import Security from '@material-ui/icons/Security';
+import Alarm from '@material-ui/icons/Alarm'
 
 
 class Menu extends React.Component {
@@ -40,25 +45,37 @@ class Menu extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-8 text-center">
-                            <img src={logo} className="logo-header mx-auto"/>
-
+                        <div>
+                            <p className="text-white mb-0">به پنل فروشگاه های زنجیره ای تونل خوش آمدید.</p>
                         </div>
-                        <div className="col-md-2">
+                        <div className="col-md-2 text-lg-end">
+                            <IconButton color="secondary" aria-label="add an alarm">
+                                <ExitToApp />
+                            </IconButton>
+                            <IconButton color="secondary" aria-label="add an alarm">
+                                <ShoppingBasket />
+                            </IconButton>
+                            <IconButton color="secondary" aria-label="add an alarm">
+                                <Security />
+                            </IconButton>
+                            <IconButton color="secondary" aria-label="add an alarm">
+                                <Alarm />
+                            </IconButton>
                         </div>
                     </div>
                 </div>
                 <nav className="menu-desktop">
                     <ul className="main-menu scroll-menu">
                         <li className="level-1">
-                            <a href="/">داشبورد</a>
+                            <Link to="/dashboard">داشبورد</Link>
                         </li>
                         {renderChild(data.data.routes)}
 
                     </ul>
-                    <button className="logout-section button button-salmon" onClick={this.logout}>
-                        <span>خروج</span>
-                    </button>
+                    <div className="text-center d-flex align-items-center">
+                        <img src={logo} className="logo-header"/>
+                    </div>
+
                 </nav>
             </header>
 
@@ -71,38 +88,32 @@ class Children extends React.Component {
         super(props);
         this.state = {
             isOpen: [this.props.id, false],
-            isActive: false
+            activeId: null,
+            isActive : false
         };
-        this.stateLi = React.createRef();
     }
 
-    subMenu = () => {
-        let indexNav = this.state.isOpen[0];
-        console.log(this.stateLi.current.getAttribute('liKeys'))
-        this.setState({
-            isOpen :[indexNav , true]
-        });
-        this.setState({
-            isOpen: [this.props.id, false],
-        })
-
+    subMenu = (id) => {
+        this.setState({isActive : true })
     };
-
     render() {
         return (
-            <li ref={this.stateLi} id={this.props.id} liKeys={this.state.isOpen}>
+            this.props.children.sub ?
+                <li url={this.props.url} liKeys={this.state.isOpen}
+                    className='hasSub'>
+                    <a linkUrl={this.props.url} onClick={this.subMenu}>{this.props.children.name}</a>
+                    <ul className={this.state.isActive  ? 'open-submenu' : 'close-submenu'}>{renderChild(this.props.children.sub)}</ul>
+                </li>
+                :
+                <li url={this.props.url} liKeys={this.state.isOpen} className='noSub'>
+                    <Link activeClassName="selected" to={this.props.url}>{this.props.children.name}</Link>
+                </li>
 
-                <a onClick={this.subMenu}>{this.props.children.name}</a>
 
-                {this.props.children.sub && (
-                    <ul isOpen={this.state.isOpen}
-                        className={this.state.isOpen[1] === true ? 'open-submenu' : 'close-submenu'}>{renderChild(this.props.children.sub)}</ul>
-                )}
-            </li>
         )
     }
 }
 
-const renderChild = (item) => Object.keys(item).map((it, index) => <Children id={index} children={item[it]}/>);
+const renderChild = (item) => Object.keys(item).map((it, index) => <Children url={it} id={index} children={item[it]}/>);
 
 export default Menu

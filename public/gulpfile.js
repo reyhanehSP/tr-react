@@ -10,7 +10,7 @@ const imagemin = require("gulp-imagemin");
 const newer = require("gulp-newer");
 const plumber = require("gulp-plumber");
 const rename = require("gulp-rename");
-const sass = require("gulp-sass");
+var sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
 const browsersync = require("browser-sync").create();
 
@@ -68,7 +68,7 @@ function font() {
 // CSS task
 function css() {
     return gulp
-        .src(["assets/app/scss/app.scss", "../node_modules/bootstrap/dist/css/bootstrap.css"])
+        .src(["assets/app/scss/app.scss", "../node_modules/bootstrap/dist/css/bootstrap.rtl.css"])
         .pipe(plumber())
         .pipe(sass({ outputStyle: "expanded" }))
         .pipe(rename({ suffix: ".min" }))

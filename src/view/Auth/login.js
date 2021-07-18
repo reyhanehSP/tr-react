@@ -25,6 +25,7 @@ class Login extends React.Component {
                     history.push('/login', {email: this.state.email});
                 } else {
                     localStorage.setItem("token", response.data.data.panel_token);
+                    console.log(response.data.data.panel_token)
                     localStorage.setItem("user", response.data.data.user);
                     history.push('/home');
                 }
