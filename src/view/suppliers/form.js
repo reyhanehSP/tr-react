@@ -45,14 +45,13 @@ function countryToFlag(isoCode) {
 
 export default function SupplierEdit() {
 
-    const handleselectedFile = (prop) => (event) => {
-        setValues({...values, [prop]: event.target.value});
-        console.log(fileInput.current.files)
+    const handleselectedFile = (prop) => () => {
+        setValues({...values, [prop]: fileInput.current.value.split('C:\\fakepath\\')});
     };
 
     const [values, setValues] = React.useState({
         selectedFile: '',
-        setSelectedFile: '',
+        // setSelectedFile: '',
     });
     const fileInput = React.useRef(null);
 
@@ -74,7 +73,7 @@ export default function SupplierEdit() {
                             {/*<Link to="/suppliers.index"> <FcPlus /></Link>*/}
                             افزودن تامین کننده
                         </div>
-                        <Divider className="my-4"/>
+                        <Divider className="my-3"/>
                         <Grid container spacing={4}>
                             <Grid item xs={12} lg={3}>
 
@@ -306,7 +305,7 @@ export default function SupplierEdit() {
                                        className={classes.input}
                                        ref={fileInput}
                                        dataName={values.selectedFile}
-                                       onClick={handleselectedFile('selectedFile')}
+                                       onChange={handleselectedFile('selectedFile')}
                                        id="icon-button-file" type="file"/>
                                 <label htmlFor="icon-button-file">
                                     <IconButton color="primary" aria-label="upload picture" component="span">
@@ -314,16 +313,12 @@ export default function SupplierEdit() {
                                     </IconButton>
                                     آپلود تصویر
                                 </label>
+                                <span className="mx-2">{values.selectedFile}</span>
                             </Grid>
                         </Grid>
                         <Divider className="my-4"/>
                         <div className="col-xs-12">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                className={classes.button}
-                                startIcon={<FcFile/>}
-                            >
+                            <Button variant="contained" color="primary" className={classes.button} startIcon={<FcFile/>}>
                                 ذخیره
                             </Button>
                         </div>
