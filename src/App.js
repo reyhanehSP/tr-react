@@ -3,8 +3,8 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import {create} from 'jss';
 import rtl from 'jss-rtl';
 import {StylesProvider, jssPreset} from '@material-ui/core/styles';
-import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
-import Menu from "./view/layaout/SidebarMenu/index"
+import {/*createMuiTheme*/ createTheme,withStyles, ThemeProvider } from '@material-ui/core/styles';
+import Menu from "./view/layaout/SidebarMenu/index";
 import Dashboard from "./view/dashboard/index";
 import Login from "./view/Auth/login";
 import Suppliers from "./view/suppliers/index";
@@ -12,13 +12,15 @@ import SuppliersEdit from "./view/suppliers/form";
 
 const jss = create({plugins: [...jssPreset().plugins, rtl()]});
 
-const theme = createMuiTheme({
+const theme = createTheme({
     direction: 'rtl',
     typography: {
         fontFamily: ['"sans"'].join(','),
         fontSize: 12,
     },
+
     palette: {
+
         primary: {
             light: '#7e89b4',
             main: '#4c5782',
@@ -31,9 +33,11 @@ const theme = createMuiTheme({
             dark: '#b2a300',
             contrastText: '#ffcc00',
         },
-        white :{
-            main: '#fff',
-            contrastText: '#fff',
+        info:{
+            light : '#9ae4d2',
+            main : '#48cfad',
+            dark : '#2ba184',
+
         },
         // Used by `getContrastText()` to maximize the contrast between
         // the background and the text.
@@ -45,8 +49,9 @@ const theme = createMuiTheme({
     },
 });
 
-class App extends React.Component {
 
+
+class App extends React.Component {
     render() {
         let tokenUsers = localStorage.getItem("token");
         return (
