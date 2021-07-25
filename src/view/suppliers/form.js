@@ -82,7 +82,7 @@ export default function SupplierEdit() {
                                             variant="outlined"
                                             fullWidth
                                             labelId="نوع خرید"
-                                            id="demo-mutiple-name"
+                                            id="demo-multiple-name"
                                             value={personName}
                                             onChange={handleChange}
                                             input={<Input />}
