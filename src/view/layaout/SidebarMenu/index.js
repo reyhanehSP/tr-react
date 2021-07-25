@@ -18,6 +18,7 @@ class Menu extends React.Component {
     render() {
         return (
             <header className="header">
+                <div id="effect-menu" ></div>
                 <div className="col-md-12">
                     <div className="top-header">
                         <div className="col-md-2 section-one">
@@ -78,7 +79,6 @@ class Menu extends React.Component {
 
                 </nav>
             </header>
-
         )
     }
 }
@@ -89,12 +89,16 @@ class Children extends React.Component {
         this.state = {
             isOpen: [this.props.id, false],
             activeId: null,
-            isActive : false
+            isActive : false,
+            effectMenu : 'de-active'
         };
     }
 
     subMenu = (id) => {
-        this.setState({isActive : true })
+        this.setState({
+            isActive : true,
+            effectMenu : 'active'
+        })
     };
     render() {
         return (

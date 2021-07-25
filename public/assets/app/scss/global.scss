@@ -66,6 +66,9 @@ a{
 .font-large{
   font-size: 1.8rem;
 }
+.font-icon-large{
+  font-size: 1.3rem;
+}
 
 .ellipsis {
   overflow: hidden;
@@ -92,4 +95,19 @@ hr{
   .MuiTextField-root{
     margin-right: 0 !important;
   }
+}
+#effect-menu{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 0;
+  background-color: rgba(0,0,0,.1);
+  transition: all .2s ease-in-out;
+  opacity: 0;
+}
+#effect-menu.effect-menu{
+  transition: all .2s ease-in-out;
+  opacity: 1;
 }

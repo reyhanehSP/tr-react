@@ -10,13 +10,21 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import {Grid, Card, TextField, Divider, Button} from '@material-ui/core';
-import {FcFile} from "@react-icons/all-files/fc/FcFile";
-import {FcPlus} from "@react-icons/all-files/fc/FcPlus";
+import {FcSearch} from "@react-icons/all-files/fc/FcSearch";
+import {FiUserPlus} from "@react-icons/all-files/fi/FiUserPlus";
+import {FcClearFilters} from "@react-icons/all-files/fc/FcClearFilters";
+import {GrSearch} from "@react-icons/all-files/gr/GrSearch";
+import {GrFilter} from "@react-icons/all-files/gr/GrFilter";
+import {GrDocumentExcel} from "@react-icons/all-files/gr/GrDocumentExcel";
+import {FcExport} from "@react-icons/all-files/fc/FcExport";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import IconButton from '@material-ui/core/IconButton';
 
 
 const useStyles = makeStyles((theme) => ({
+    margin: {
+        margin: theme.spacing(1),
+    },
     formControl: {
         margin: theme.spacing(1),
     },
@@ -113,287 +121,297 @@ export default function Suppliers() {
 
     return (
         <div className="row mx-0 my-4">
-            <Grid container spacing={1}>
-                <Grid item xs={12} lg={12}>
-                    <Card className="p-4 mb-4">
-                        <div
-                            className="d-flex align-items-center justify-content-between font-size-lg font-weight-bold">
+            <Grid item xs={12} lg={12}>
+                <Card className="pt-1 pb-3 px-3 mb-3">
+                    <div className="d-flex align-items-center justify-content-between font-size-lg font-weight-bold">
                             <span>
-                                 <IconButton color="primary" aria-label="add an alarm">
-                                    <Link to="/suppliers.index"> <FcPlus/></Link>
-                                 </IconButton>
-
-                            تامین کنندگان
+                            <Link to="/suppliers.create"
+                                  className="text-info font-icon-large mx-2"> <FiUserPlus/></Link>
+                            <span>تامین کنندگان</span>
                             </span>
 
-                            <Button variant="contained" color="primary" className={classes.button}
-                                    startIcon={<FcFile/>}>
-                                ذخیره
-                            </Button>
-                        </div>
-                        <Divider className="my-3"/>
-                        <Grid container spacing={4}>
-                            <Grid item xs={12} lg={3}>
-                                <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
-                                           className="m-2" id="outlined-textarea"
-                                           label="نام تامین کننده"
-                                           placeholder=" نام تامین کننده" variant="outlined"/>
+                        <ul className="d-flex mb-0 p-0">
+                            <li>
+                                <IconButton className={classes.button}>
+                                    <GrFilter/>
+                                </IconButton>
+                            </li>
 
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={countries}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(option) => option.label}
-                                              renderOption={(option) => (
-                                                  <React.Fragment>
-                                                      <span>{countryToFlag(option.code)}</span>
-                                                      {option.label} ({option.code}) +{option.phone}
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="وضعیت بررسی"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: 'new-password',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={countries}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(option) => option.label}
-                                              renderOption={(option) => (
-                                                  <React.Fragment>
-                                                      <span>{countryToFlag(option.code)}</span>
-                                                      {option.label} ({option.code}) +{option.phone}
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="وضعیت تائید"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: 'new-password',
-                                                      }}
-                                                  />
-                                              )}
-                                />
+                            <li>
+                                <IconButton className={classes.button}>
+                                    <GrDocumentExcel/>
+                                </IconButton>
+                            </li>
+                            <li>
+                                <IconButton className={classes.button}>
+                                    <GrSearch/>
+                                </IconButton>
+                            </li>
 
-                            </Grid>
-                            <Grid item xs={12} lg={3}>
-                                <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
-                                           id="outlined-multiline-flexible"
-                                           label="کد تامین کننده"
-                                           size="small" placeholder="کد تامین کننده"
-                                           variant="outlined"/>
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={countries}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(option) => option.label}
-                                              renderOption={(option) => (
-                                                  <React.Fragment>
-                                                      <span>{countryToFlag(option.code)}</span>
-                                                      {option.label} ({option.code}) +{option.phone}
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="نوع تامین کننده"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: 'new-password',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={countries}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(option) => option.label}
-                                              renderOption={(option) => (
-                                                  <React.Fragment>
-                                                      <span>{countryToFlag(option.code)}</span>
-                                                      {option.label} ({option.code}) +{option.phone}
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="نوع خرید"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: 'new-password',
-                                                      }}
-                                                  />
-                                              )}
-                                />
+                        </ul>
+                    </div>
+                    <Divider className="my-1"/>
+                    <Grid container spacing={4}>
+                        <Grid item xs={12} lg={3}>
+                            <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
+                                       className="mt-3" id="outlined-textarea"
+                                       label="نام تامین کننده"
+                                       placeholder=" نام تامین کننده" variant="outlined"/>
 
-
-                            </Grid>
-                            <Grid item xs={12} lg={3}>
-
-                                <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
-                                           id="outlined-multiline-flexible"
-                                           label="کد حسابداری"
-                                           size="small" placeholder="کد حسابداری"
-                                           variant="outlined"/>
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={countries}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(option) => option.label}
-                                              renderOption={(option) => (
-                                                  <React.Fragment>
-                                                      <span>{countryToFlag(option.code)}</span>
-                                                      {option.label} ({option.code}) +{option.phone}
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="ارزش افزوده"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: 'new-password',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={countries}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(option) => option.label}
-                                              renderOption={(option) => (
-                                                  <React.Fragment>
-                                                      <span>{countryToFlag(option.code)}</span>
-                                                      {option.label} ({option.code}) +{option.phone}
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="نوع فاکتور"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: 'new-password',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                            </Grid>
-                            <Grid item xs={12} lg={3}>
-                                <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
-                                           className="m-2" id="outlined-textarea"
-                                           label="کد کیان"
-                                           placeholder="کد کیان" variant="outlined"/>
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={countries}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(option) => option.label}
-                                              renderOption={(option) => (
-                                                  <React.Fragment>
-                                                      <span>{countryToFlag(option.code)}</span>
-                                                      {option.label} ({option.code}) +{option.phone}
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="تقبل مسئولیت خرید"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: 'new-password',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={countries}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(option) => option.label}
-                                              renderOption={(option) => (
-                                                  <React.Fragment>
-                                                      <span>{countryToFlag(option.code)}</span>
-                                                      {option.label} ({option.code}) +{option.phone}
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="روش پرداخت"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: 'new-password',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                            </Grid>
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="وضعیت بررسی"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="وضعیت تائید"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
 
                         </Grid>
-                    </Card>
-                </Grid>
+                        <Grid item xs={12} lg={3}>
+                            <TextField fullWidth InputLabelProps={{shrink: true}} className="mt-3"
+                                       id="outlined-multiline-flexible"
+                                       label="کد تامین کننده"
+                                       size="small" placeholder="کد تامین کننده"
+                                       variant="outlined"/>
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="نوع تامین کننده"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="نوع خرید"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+
+
+                        </Grid>
+                        <Grid item xs={12} lg={3}>
+
+                            <TextField fullWidth InputLabelProps={{shrink: true}} className="mt-3"
+                                       id="outlined-multiline-flexible"
+                                       label="کد حسابداری"
+                                       size="small" placeholder="کد حسابداری"
+                                       variant="outlined"/>
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="ارزش افزوده"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="نوع فاکتور"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+                        </Grid>
+                        <Grid item xs={12} lg={3}>
+                            <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
+                                       className="mt-3" id="outlined-textarea"
+                                       label="کد کیان"
+                                       placeholder="کد کیان" variant="outlined"/>
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="تقبل مسئولیت خرید"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="روش پرداخت"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+                        </Grid>
+
+                    </Grid>
+                </Card>
             </Grid>
-            <Grid container spacing={1}>
+            <Grid container>
                 <Grid item xs={12} lg={12}>
                     <Card className="">
                         <TableContainer className={classes.container}>

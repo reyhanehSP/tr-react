@@ -43,7 +43,7 @@ function countryToFlag(isoCode) {
 }
 
 
-export default function SupplierEdit() {
+export default function UsersEdit() {
 
     const handleselectedFile = (prop) => () => {
         setValues({...values, [prop]: fileInput.current.value.split('C:\\fakepath\\')});
