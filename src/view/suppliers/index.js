@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -8,6 +9,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import {FcPlus} from "@react-icons/all-files/fc/FcPlus";
+import {GrSearch} from "@react-icons/all-files/gr/GrSearch";
+
 import {
     Grid,
     Card,
@@ -16,6 +20,8 @@ import {
     Button
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import ExitToApp from "@material-ui/core/SvgIcon/SvgIcon";
 
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
@@ -119,8 +125,20 @@ export default function StickyHeadTable() {
             <Grid spacing={1}>
                 <Card className="px-3 pb-4 pt-3 mb-4">
                     <div className="font-size-lg font-weight-bold">
-                        {/*<Link to="/suppliers.index"> <FcPlus /></Link>*/}
-                         تامین کنندگان
+                        <span>
+                            <Link to="/suppliers.index"> <FcPlus /></Link>
+                            تامین کنندگان
+                        </span>
+
+                        <span>
+                            <ul>
+                                <li>
+                                    <IconButton  aria-label="add an alarm">
+                                <GrSearch />
+                            </IconButton>
+                                </li>
+                            </ul>
+                        </span>
                     </div>
                     <Divider className="my-2"/>
                     <Grid container spacing={4}>
