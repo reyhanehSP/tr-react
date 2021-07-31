@@ -123,7 +123,6 @@ export default function UsersEdit() {
     const [activeList, setActiveList] = React.useState(0);
     function changeType(event, value) {
         console.log(value);
-        console.log(departList.current.getAttribute('active'))
         if(value === 'تامین کنندگان'){
             setActiveList('تامین کنندگان');
         }
@@ -310,6 +309,7 @@ export default function UsersEdit() {
                                             ))}
                                         </Select>
                                     </FormControl>
+                                    {activeList ===   'تامین کنندگان' &&
                                     <FormControl fullWidth className={classes.formControl} variant="outlined">
                                         <InputLabel htmlFor="demo-mutiple-checkbox">لیست دپارتمان‌ها</InputLabel>
                                         <Select
@@ -336,8 +336,9 @@ export default function UsersEdit() {
                                                 </MenuItem>
                                             ))}
                                         </Select
->
-                                    </FormControl>
+                                        >
+                                    </FormControl>}
+
                                 </Grid>
                                 <Grid item xs={12} lg={12} container spacing={1}>
                                     <Grid item xs={12} lg={3}>
