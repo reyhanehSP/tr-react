@@ -9,6 +9,8 @@ import Dashboard from "./view/dashboard/index";
 import Login from "./view/Auth/login";
 import Suppliers from "./view/suppliers/index";
 import SuppliersEdit from "./view/suppliers/form";
+import Users from "./view/users/index";
+import UsersEdit from "./view/users/form";
 
 const jss = create({plugins: [...jssPreset().plugins, rtl()]});
 
@@ -63,14 +65,25 @@ class App extends React.Component {
                             <Switch>
                                 {tokenUsers && <Route path="/dashboard" component={Dashboard}/>}
                                 <Route exact path="/login" component={Login}/>
-                                {tokenUsers ? <Redirect from="/suppliers.index" to="/suppliers"/> :
-                                    <Redirect from={'*'} to="/login"/>}
+
+                                /* Supplier */
                                 {tokenUsers ? <Redirect from="/suppliers.index" to="/suppliers"/> :
                                     <Redirect from={'*'} to="/login"/>}
                                 {tokenUsers && <Route path="/suppliers" component={Suppliers}/>}
+
                                 {tokenUsers ? <Redirect from="/suppliers.create" to="/suppliersForm"/> :
                                     <Redirect from={'*'} to="/login"/>}
                                 {tokenUsers && <Route path="/suppliersForm" component={SuppliersEdit}/>}
+
+                                /* Users */
+                                {tokenUsers ? <Redirect from="/users.index" to="/users"/> :
+                                    <Redirect from={'*'} to="/login"/>}
+                                {tokenUsers && <Route path="/users" component={Users}/>}
+
+                                {tokenUsers ? <Redirect from="/users.create" to="/usersForm"/> :
+                                    <Redirect from={'*'} to="/login"/>}
+                                {tokenUsers && <Route path="/usersForm" component={UsersEdit}/>}
+
                             </Switch>
                         </div>
                 </StylesProvider>

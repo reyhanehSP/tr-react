@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,8 +9,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import {FcPlus} from "@react-icons/all-files/fc/FcPlus";
 import {GrSearch} from "@react-icons/all-files/gr/GrSearch";
+import {GrDocumentExcel} from "@react-icons/all-files/gr/GrDocumentExcel";
+import {GrFilter} from "@react-icons/all-files/gr/GrFilter";
+import {IoPersonAddOutline} from "@react-icons/all-files/io5/IoPersonAddOutline";
 
 import {
     Grid,
@@ -24,8 +26,8 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import ExitToApp from "@material-ui/core/SvgIcon/SvgIcon";
 
 const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+    {id: 'name', label: 'Name', minWidth: 170},
+    {id: 'code', label: 'ISO\u00a0Code', minWidth: 100},
     {
         id: 'population',
         label: 'Population',
@@ -51,7 +53,7 @@ const columns = [
 
 function createData(name, code, population, size) {
     const density = population / size;
-    return { name, code, population, size, density };
+    return {name, code, population, size, density};
 }
 
 const rows = [
@@ -88,7 +90,8 @@ function countryToFlag(isoCode) {
             .replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
         : isoCode;
 }
-export default function StickyHeadTable() {
+
+export default function Suppliers() {
 
     const handleselectedFile = (prop) => () => {
         setValues({...values, [prop]: fileInput.current.value.split('C:\\fakepath\\')});
@@ -124,19 +127,25 @@ export default function StickyHeadTable() {
         <div className="row mx-0 my-4">
             <Grid spacing={1}>
                 <Card className="px-3 pb-4 pt-3 mb-4">
-                    <div className="font-size-lg font-weight-bold">
+                    <div className="d-flex align-items-baseline justify-content-between font-size-lg font-weight-bold">
                         <span>
-                            <Link to="/suppliers.index"> <FcPlus /></Link>
-                            تامین کنندگان
+                            <Link to="/suppliers.create" className="mx-2 font-bold-icon"> <IoPersonAddOutline/></Link>
+                            <span>تامین کنندگان</span>
+
                         </span>
 
                         <span>
-                            <ul>
+                            <ul className="d-flex align-content-center mb-0 p-0">
                                 <li>
-                                    <IconButton  aria-label="add an alarm">
-                                <GrSearch />
-                            </IconButton>
+                                    <IconButton aria-label="add an alarm"><GrFilter/></IconButton>
                                 </li>
+                                 <li>
+                                    <IconButton aria-label="add an alarm"><GrDocumentExcel/></IconButton>
+                                </li>
+                                <li>
+                                    <IconButton aria-label="add an alarm"><GrSearch/></IconButton>
+                                </li>
+
                             </ul>
                         </span>
                     </div>
@@ -150,33 +159,33 @@ export default function StickyHeadTable() {
                                        placeholder="نام تامین کننده" variant="outlined"/>
 
                             <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="mt-3"
-                                              options={countries}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(option) => option.label}
-                                              renderOption={(option) => (
-                                                  <React.Fragment>
-                                                      <span>{countryToFlag(option.code)}</span>
-                                                      {option.label} ({option.code}) +{option.phone}
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="وضعیت بررسی"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: 'new-password',
-                                                      }}
-                                                  />
-                                              )}
-                        />
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="وضعیت بررسی"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
 
                             <Autocomplete fullWidth
                                           size="small"
@@ -433,7 +442,7 @@ export default function StickyHeadTable() {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{ minWidth: column.minWidth }}
+                                        style={{minWidth: column.minWidth}}
                                     >
                                         {column.label}
                                     </TableCell>
