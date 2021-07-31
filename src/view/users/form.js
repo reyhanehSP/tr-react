@@ -120,14 +120,12 @@ export default function UsersEdit() {
     const handleDelete = (chipToDelete) => () => {
         setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
     };
-    const [activeList, setActiveList] = React.useState({
-        isActiveList: '',
-    });
+    const [activeList, setActiveList] = React.useState(0);
     function changeType(event, value) {
         console.log(value);
         console.log(departList.current.getAttribute('active'))
         if(value === 'تامین کنندگان'){
-            setActiveList({...activeList, [value]: departList.current.getAttribute('active')});
+            setActiveList('تامین کنندگان');
         }
 
     }
@@ -313,7 +311,7 @@ export default function UsersEdit() {
                                         <InputLabel htmlFor="demo-mutiple-checkbox">لیست دپارتمان‌ها</InputLabel>
                                         <Select
                                             ref={departList}
-                                            active={`${activeList.isActiveList}`}
+                                            active={activeList}
                                             inputProps={{
                                                 name: 'لیست دپارتمان‌ها',
                                                 id: 'demo-mutiple-checkbox',
