@@ -307,9 +307,11 @@ export default function UsersEdit() {
                                             ))}
                                         </Select>
                                     </FormControl>
-                                    <FormControl fullWidth className={classes.formControl} variant="outlined">
+                                    <FormControl   className={activeList === 'تامین کنندگان' ? '' : 'hidden'}
+                                                   fullWidth className={classes.formControl} variant="outlined">
                                         <InputLabel htmlFor="demo-mutiple-checkbox">لیست دپارتمان‌ها</InputLabel>
                                         <Select
+
                                             ref={departList}
                                             active={activeList}
                                             inputProps={{
