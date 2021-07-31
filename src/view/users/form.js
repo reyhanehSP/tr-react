@@ -127,6 +127,9 @@ export default function UsersEdit() {
         if(value === 'تامین کنندگان'){
             setActiveList('تامین کنندگان');
         }
+        else{
+            setActiveList('');
+        }
 
     }
     const handleSelectChange = (event) => {
@@ -307,8 +310,7 @@ export default function UsersEdit() {
                                             ))}
                                         </Select>
                                     </FormControl>
-                                    <FormControl   className={activeList === 'تامین کنندگان' ? '' : 'hidden'}
-                                                   fullWidth className={classes.formControl} variant="outlined">
+                                    <FormControl fullWidth className={classes.formControl} variant="outlined">
                                         <InputLabel htmlFor="demo-mutiple-checkbox">لیست دپارتمان‌ها</InputLabel>
                                         <Select
 
@@ -333,7 +335,8 @@ export default function UsersEdit() {
                                                     <ListItemText primary={name}/>
                                                 </MenuItem>
                                             ))}
-                                        </Select>
+                                        </Select
+>
                                     </FormControl>
                                 </Grid>
                                 <Grid item xs={12} lg={12} container spacing={1}>
