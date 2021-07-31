@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import {Link} from 'react-router-dom';
 import {FcFile} from "@react-icons/all-files/fc/FcFile";
 import {GrUserAdd} from "@react-icons/all-files/gr/GrUserAdd";
 import {GrSchedule} from "@react-icons/all-files/gr/GrSchedule";
@@ -56,13 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function countryToFlag(isoCode) {
-    return typeof String.fromCodePoint !== 'undefined'
-        ? isoCode
-            .toUpperCase()
-            .replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
-        : isoCode;
-}
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -86,17 +79,9 @@ const names = [
     'Kelly Snyder',
 ];
 
-function getStyles(name, personName, theme) {
-    return {
-        fontWeight:
-            personName.indexOf(name) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
-    };
-}
 
 function TabPanel(props) {
-    const { value, index, ...other } = props;
+    const {value, index, ...other} = props;
     return (
         <div
             role="tabpanel"
@@ -108,10 +93,12 @@ function TabPanel(props) {
         </div>
     );
 }
+
 TabPanel.propTypes = {
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
 };
+
 function a11yProps(index) {
     return {
         id: `scrollable-force-tab-${index}`,
@@ -120,7 +107,13 @@ function a11yProps(index) {
 }
 
 export default function UsersEdit() {
+    const classes = useStyles();
+
     const [value, setValue] = React.useState(0);
+
+    const [activeList, setActiveList] = React.useState({
+        isActiveList: '',
+    });
 
     const [personName, setPersonName] = React.useState([]);
 
@@ -129,6 +122,15 @@ export default function UsersEdit() {
     const handleDelete = (chipToDelete) => () => {
         setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
     };
+
+    function changeType(event, value) {
+        console.log(value);
+        if(value === 'تامین کنندگان'){
+            alert('hi')
+            setActiveList({...values, [value]: departList.current.active});
+        }
+
+    }
     const handleSelectChange = (event) => {
         setChipData(event.target.value);
     };
@@ -146,42 +148,34 @@ export default function UsersEdit() {
 
     const fileInput = React.useRef(null);
 
-    const classes = useStyles();
+    const departList = React.useRef(null);
+
 
     const countries = [
-        {code: 'AD', label: 'Andorra', phone: '376'},
-        {code: 'AE', label: 'United Arab Emirates', phone: '971'},
-        {code: 'AF', label: 'Afghanistan', phone: '93'},
-        {code: 'AG', label: 'Antigua and Barbuda', phone: '1-268'},
-        {code: 'AI', label: 'Anguilla', phone: '1-264'},
+        {id:1 , label: 'نیروی فروشگاه'},
+        {id:2 , label: 'خرید-بازار'},
+        {id:3 , label: 'تامین کنندگان'},
     ];
     return (
 
-        <div className="row mx-0 my-4">
+        <div className="row mx-0 my-3">
             <Grid spacing={1}>
                 <Card className="px-3 pb-3">
-            {/*<AppBar position="static" color="default">*/}
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    variant="fullWidth"
-                    scrollButtons="on"
-                    indicatorColor="primary"
-                    textColor="primary"
-                    aria-label="scrollable force tabs example"
-                >
-                    <Tab label="افزودن کاربر" icon={<GrUserAdd />} {...a11yProps(0)} />
-                    <Tab label="احکام محاسبات" icon={<GrSchedule />} {...a11yProps(1)} />
-                </Tabs>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        variant="fullWidth"
+                        scrollButtons="on"
+                        indicatorColor="primary"
+                        textColor="primary"
+                        aria-label="scrollable force tabs example"
+                    >
+                        <Tab label="افزودن کاربر" icon={<GrUserAdd/>} {...a11yProps(0)} />
+                        <Tab label="احکام محاسبات" icon={<GrSchedule/>} {...a11yProps(1)} />
+                    </Tabs>
                     <Divider className="mb-3"/>
-            {/*</AppBar>*/}
-
-            <TabPanel value={value} index={0}>
-                    <Grid item xs={12} lg={12}>
-                            <div className="font-size-lg font-weight-bold">
-                                افزودن تامین کننده
-                            </div>
-                            <Divider className="my-3"/>
+                    <TabPanel value={value} index={0}>
+                        <Grid item xs={12} lg={12}>
                             <Grid container spacing={4}>
                                 <Grid item xs={12} lg={3}>
                                     <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
@@ -196,6 +190,7 @@ export default function UsersEdit() {
                                                   id="country-select-demo"
                                                   className="m-2"
                                                   options={countries}
+                                                  onInputChange={changeType}
                                                   classes={{
                                                       option: classes.option,
                                                   }}
@@ -203,8 +198,8 @@ export default function UsersEdit() {
                                                   getOptionLabel={(option) => option.label}
                                                   renderOption={(option) => (
                                                       <React.Fragment>
-                                                          <span>{countryToFlag(option.code)}</span>
-                                                          {option.label} ({option.code}) +{option.phone}
+                                                          <span>{(option.label)}</span>
+                                                          {option.label}
                                                       </React.Fragment>
                                                   )}
                                                   renderInput={(params) => (
@@ -244,7 +239,7 @@ export default function UsersEdit() {
                                                   getOptionLabel={(option) => option.label}
                                                   renderOption={(option) => (
                                                       <React.Fragment>
-                                                          <span>{countryToFlag(option.code)}</span>
+                                                          <span>{(option.label)}</span>
                                                           {option.label} ({option.code}) +{option.phone}
                                                       </React.Fragment>
                                                   )}
@@ -265,7 +260,7 @@ export default function UsersEdit() {
                                     <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
                                                id="outlined-multiline-flexible"
                                                label="کد پرسنلی"
-                                               size="small" placeholder="کد تامین کننده"
+                                               size="small" placeholder="کد پرسنلی"
                                                variant="outlined"/>
                                     <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
                                                id="outlined-multiline-flexible"
@@ -285,12 +280,13 @@ export default function UsersEdit() {
 
                                     <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
                                                id="outlined-multiline-flexible" label="تکرار رمز عبور"
-                                               placeholder="تکرار رمز عبور" size="small" value="" onChange="" variant="outlined"/>
+                                               placeholder="تکرار رمز عبور" size="small" value="" onChange=""
+                                               variant="outlined"/>
 
                                 </Grid>
-                                <Grid item xs={12} lg={12}>
+                                <Grid className="py-0" item xs={12} lg={12}>
                                     <FormControl fullWidth className={classes.formControl} variant="outlined">
-                                        <InputLabel  htmlFor="demo-mutiple-checkbox">فروشگاه ها</InputLabel>
+                                        <InputLabel htmlFor="demo-mutiple-checkbox">فروشگاه ها</InputLabel>
                                         <Select
                                             inputProps={{
                                                 name: 'فروشگاه ها',
@@ -300,63 +296,70 @@ export default function UsersEdit() {
                                             label="فروشگاه ها"
                                             value={chipData}
                                             onChange={handleSelectChange}
-                                            renderValue={(selected) => selected.map(val => <Chip  className="m-lg-1 ms-xl-1"  key={val} onDelete={handleDelete(val)} label={val} />)}
+                                            renderValue={(selected) => selected.map(val => <Chip
+                                                className="m-lg-1 ms-xl-1" key={val} onDelete={handleDelete(val)}
+                                                label={val}/>)}
                                             MenuProps={MenuProps}
                                         >
                                             {names.map((name) => (
                                                 <MenuItem key={name} value={name}>
-                                                    <Checkbox  color="primary" checked={chipData.indexOf(name) > -1} />
-                                                    <ListItemText primary={name} />
+                                                    <Checkbox color="primary" checked={chipData.indexOf(name) > -1}/>
+                                                    <ListItemText primary={name}/>
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                    <FormControl fullWidth className={classes.formControl} variant="outlined">
+                                        <InputLabel htmlFor="demo-mutiple-checkbox">لیست دپارتمان‌ها</InputLabel>
+                                        <Select
+                                            ref={departList}
+                                            active={values.isActiveList}
+                                            inputProps={{
+                                                name: 'لیست دپارتمان‌ها',
+                                                id: 'demo-mutiple-checkbox',
+                                            }}
+                                            multiple
+                                            label="لیست دپارتمان‌ها"
+                                            value={chipData}
+                                            onChange={handleSelectChange}
+                                            renderValue={(selected) => selected.map(val => <Chip
+                                                className="m-lg-1 ms-xl-1" key={val} onDelete={handleDelete(val)}
+                                                label={val}/>)}
+                                            MenuProps={MenuProps}
+                                        >
+                                            {names.map((name) => (
+                                                <MenuItem key={name} value={name}>
+                                                    <Checkbox color="primary" checked={chipData.indexOf(name) > -1}/>
+                                                    <ListItemText primary={name}/>
                                                 </MenuItem>
                                             ))}
                                         </Select>
                                     </FormControl>
                                 </Grid>
-                                <Grid item xs={12} lg={12}>
-                                    {/*<FormControl className={classes.formControl}>*/}
-                                        {/*<InputLabel fullWidth id="demo-mutiple-checkbox-label">لیست دپارتمان ها</InputLabel>*/}
-                                        {/*<Select*/}
-                                            {/*fullWidth*/}
-                                            {/*labelId="demo-mutiple-checkbox-label"*/}
-                                            {/*id="demo-mutiple-checkbox"*/}
-                                            {/*multiple*/}
-                                            {/*value={personName}*/}
-                                            {/*onChange={handleSelectChange}*/}
-                                            {/*input={<Input />}*/}
-                                            {/*renderValue={(selected) => selected.join(', ')}*/}
-                                            {/*MenuProps={MenuProps}*/}
-                                        {/*>*/}
-                                            {/*{names.map((name) => (*/}
-                                                {/*<MenuItem key={name} value={name}>*/}
-                                                    {/*<Checkbox checked={personName.indexOf(name) > -1} />*/}
-                                                    {/*<ListItemText primary={name} />*/}
-                                                {/*</MenuItem>*/}
-                                            {/*))}*/}
-                                        {/*</Select>*/}
-                                    {/*</FormControl>*/}
-                                </Grid>
-                                <Grid item xs={12} lg={2}>
-                                    <p>اجازه استفاده از پنل</p>
-                                    <BootstrapSwitchButton onlabel="دارد" offlabel="ندارد" checked={true}
-                                                           onstyle="warning"/>
-                                </Grid>
-                                <Grid item xs={12} lg={2}>
-                                    <p>اجازه استفاده از اپ</p>
-                                    <BootstrapSwitchButton onlabel="دارد" offlabel="ندارد" checked={true}
-                                                           onstyle="warning"/>
-                                </Grid>
-                                <Grid item xs={12} lg={2}>
-                                    <p>اجازه استفاده از tchat</p>
-                                    <BootstrapSwitchButton onlabel="دارد" offlabel="ندارد" checked={true}
-                                                           onstyle="warning"/>
-                                </Grid>
-                                <Grid item xs={12} lg={2}>
-                                    <p>مشارکت کننده</p>
-                                    <BootstrapSwitchButton onlabel="دارد" offlabel="ندارد" checked={true}
-                                                           onstyle="warning"/>
+                                <Grid item xs={12} lg={12} container spacing={1}>
+                                    <Grid item xs={12} lg={3}>
+                                        <p>اجازه استفاده از پنل</p>
+                                        <BootstrapSwitchButton onlabel="دارد" offlabel="ندارد" checked={true}
+                                                               onstyle="warning"/>
+                                    </Grid>
+                                    <Grid item xs={12} lg={3}>
+                                        <p>اجازه استفاده از اپ</p>
+                                        <BootstrapSwitchButton onlabel="دارد" offlabel="ندارد" checked={true}
+                                                               onstyle="warning"/>
+                                    </Grid>
+                                    <Grid item xs={12} lg={3}>
+                                        <p>اجازه استفاده از tchat</p>
+                                        <BootstrapSwitchButton onlabel="دارد" offlabel="ندارد" checked={true}
+                                                               onstyle="warning"/>
+                                    </Grid>
+                                    <Grid item xs={12} lg={3}>
+                                        <p>مشارکت کننده</p>
+                                        <BootstrapSwitchButton onlabel="دارد" offlabel="ندارد" checked={true}
+                                                               onstyle="warning"/>
+                                    </Grid>
                                 </Grid>
 
-                                <Grid item xs={12} lg={12}>
+                                <Grid className="py-0" item xs={12} lg={12}>
                                     <input accept="image/*"
                                            className={classes.input}
                                            ref={fileInput}
@@ -374,15 +377,16 @@ export default function UsersEdit() {
                             </Grid>
                             <Divider className="my-4"/>
                             <div className="col-xs-12">
-                                <Button variant="contained" color="primary" className={classes.button} startIcon={<FcFile/>}>
+                                <Button variant="contained" color="primary" className={classes.button}
+                                        startIcon={<FcFile/>}>
                                     ذخیره
                                 </Button>
                             </div>
-                    </Grid>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
+                        </Grid>
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        Item Two
+                    </TabPanel>
                 </Card>
             </Grid>
         </div>
