@@ -1,15 +1,13 @@
 import React from 'react';
-import {makeStyles , withStyles} from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import {FcSearch} from "@react-icons/all-files/fc/FcSearch";
-import {FcExport} from "@react-icons/all-files/fc/FcExport";
-import TableCell from '@material-ui/core/TableCell';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-// import { AutoSizer, Column, Table } from 'react-virtualized';
-
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
 import {
     Grid,
     Card,
@@ -17,241 +15,136 @@ import {
     Divider,
     Button
 } from '@material-ui/core';
-
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import ExitToApp from "@material-ui/core/SvgIcon/SvgIcon";
 
+const columns = [
+    { id: 'name', label: 'Name', minWidth: 170 },
+    { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+    {
+        id: 'population',
+        label: 'Population',
+        minWidth: 170,
+        align: 'right',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'size',
+        label: 'Size\u00a0(km\u00b2)',
+        minWidth: 170,
+        align: 'right',
+        format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'density',
+        label: 'Density',
+        minWidth: 170,
+        align: 'right',
+        format: (value) => value.toFixed(2),
+    },
+];
 
+function createData(name, code, population, size) {
+    const density = population / size;
+    return { name, code, population, size, density };
+}
 
+const rows = [
+    createData('India', 'IN', 1324171354, 3287263),
+    createData('China', 'CN', 1403500365, 9596961),
+    createData('Italy', 'IT', 60483973, 301340),
+    createData('United States', 'US', 327167434, 9833520),
+    createData('Canada', 'CA', 37602103, 9984670),
+    createData('Australia', 'AU', 25475400, 7692024),
+    createData('Germany', 'DE', 83019200, 357578),
+    createData('Ireland', 'IE', 4857000, 70273),
+    createData('Mexico', 'MX', 126577691, 1972550),
+    createData('Japan', 'JP', 126317000, 377973),
+    createData('France', 'FR', 67022000, 640679),
+    createData('United Kingdom', 'GB', 67545757, 242495),
+    createData('Russia', 'RU', 146793744, 17098246),
+    createData('Nigeria', 'NG', 200962417, 923768),
+    createData('Brazil', 'BR', 210147125, 8515767),
+];
 
-
-const styles = (theme) => ({
-    flexContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        boxSizing: 'border-box',
+const useStyles = makeStyles({
+    root: {
+        width: '100%',
     },
-    table: {
-        // temporary right-to-left patch, waiting for
-        // https://github.com/bvaughn/react-virtualized/issues/454
-        '& .ReactVirtualized__Table__headerRow': {
-            flip: false,
-            paddingRight: theme.direction === 'rtl' ? '0 !important' : undefined,
-        },
-    },
-    tableRow: {
-        cursor: 'pointer',
-    },
-    tableRowHover: {
-        '&:hover': {
-            backgroundColor: theme.palette.grey[200],
-        },
-    },
-    tableCell: {
-        flex: 1,
-    },
-    noClick: {
-        cursor: 'initial',
+    container: {
+        maxHeight: 440,
     },
 });
 
-class MuiVirtualizedTable extends React.PureComponent {
-    static defaultProps = {
-        headerHeight: 48,
-        rowHeight: 48,
-    };
-
-    getRowClassName = ({ index }) => {
-        const { classes, onRowClick } = this.props;
-
-        return clsx(classes.tableRow, classes.flexContainer, {
-            [classes.tableRowHover]: index !== -1 && onRowClick != null,
-        });
-    };
-
-    cellRenderer = ({ cellData, columnIndex }) => {
-        const { columns, classes, rowHeight, onRowClick } = this.props;
-        return (
-            <TableCell
-                component="div"
-                className={clsx(classes.tableCell, classes.flexContainer, {
-                    [classes.noClick]: onRowClick == null,
-                })}
-                variant="body"
-                style={{ height: rowHeight }}
-                align={(columnIndex != null && columns[columnIndex].numeric) || false ? 'right' : 'left'}
-            >
-                {cellData}
-            </TableCell>
-        );
-    };
-
-    headerRenderer = ({ label, columnIndex }) => {
-        const { headerHeight, columns, classes } = this.props;
-
-        return (
-            <TableCell
-                component="div"
-                className={clsx(classes.tableCell, classes.flexContainer, classes.noClick)}
-                variant="head"
-                style={{ height: headerHeight }}
-                align={columns[columnIndex].numeric || false ? 'right' : 'left'}
-            >
-                <span>{label}</span>
-            </TableCell>
-        );
-    };
-
-    render() {
-        const { classes, columns, rowHeight, headerHeight, ...tableProps } = this.props;
-        return (
-            <AutoSizer>
-                {({ height, width }) => (
-                    <Table
-                        height={height}
-                        width={width}
-                        rowHeight={rowHeight}
-                        gridStyle={{
-                            direction: 'inherit',
-                        }}
-                        headerHeight={headerHeight}
-                        className={classes.table}
-                        {...tableProps}
-                        rowClassName={this.getRowClassName}
-                    >
-                        {columns.map(({ dataKey, ...other }, index) => {
-                            return (
-                                <Column
-                                    key={dataKey}
-                                    headerRenderer={(headerProps) =>
-                                        this.headerRenderer({
-                                            ...headerProps,
-                                            columnIndex: index,
-                                        })
-                                    }
-                                    className={classes.flexContainer}
-                                    cellRenderer={this.cellRenderer}
-                                    dataKey={dataKey}
-                                    {...other}
-                                />
-                            );
-                        })}
-                    </Table>
-                )}
-            </AutoSizer>
-        );
-    }
+function countryToFlag(isoCode) {
+    return typeof String.fromCodePoint !== 'undefined'
+        ? isoCode
+            .toUpperCase()
+            .replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
+        : isoCode;
 }
+export default function StickyHeadTable() {
 
-MuiVirtualizedTable.propTypes = {
-    classes: PropTypes.object.isRequired,
-    columns: PropTypes.arrayOf(
-        PropTypes.shape({
-            dataKey: PropTypes.string.isRequired,
-            label: PropTypes.string.isRequired,
-            numeric: PropTypes.bool,
-            width: PropTypes.number.isRequired,
-        }),
-    ).isRequired,
-    headerHeight: PropTypes.number,
-    onRowClick: PropTypes.func,
-    rowHeight: PropTypes.number,
-};
+    const handleselectedFile = (prop) => () => {
+        setValues({...values, [prop]: fileInput.current.value.split('C:\\fakepath\\')});
+    };
 
-const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
+    const [values, setValues] = React.useState({
+        selectedFile: '',
+        // setSelectedFile: '',
+    });
+    const fileInput = React.useRef(null);
 
-// ---
-
-const sample = [
-    ['Frozen yoghurt', 159, 6.0, 24, 4.0],
-    ['Ice cream sandwich', 237, 9.0, 37, 4.3],
-    ['Eclair', 262, 16.0, 24, 6.0],
-    ['Cupcake', 305, 3.7, 67, 4.3],
-    ['Gingerbread', 356, 16.0, 49, 3.9],
-];
-
-function createData(id, dessert, calories, fat, carbs, protein) {
-    return { id, dessert, calories, fat, carbs, protein };
-}
-
-const rows = [];
-
-for (let i = 0; i < 200; i += 1) {
-    const randomSelection = sample[Math.floor(Math.random() * sample.length)];
-    rows.push(createData(i, ...randomSelection));
-}
-
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        margin: theme.spacing(1),
-    },
-    option: {
-        fontSize: 13,
-        '& > span': {
-            fontSize: 13,
-        },
-    },
-    button: {
-        float: 'right',
-    },
-    input: {
-        display: 'none',
-    },
-}));
-
-const options = ['همه','شده','نشده'];
-const confirm = ['فعال','غیر فعال'];
-const type_supplier = ['حقیقی','حقوقی'];
-const type_buy = ['قطعی','امانی','کمیسیونی'];
-const value_added = ['دارد','ندارد'];
-const type_factor = ['رسمی اعتباردار','رسمی بدون اعتبار','سایر'];
-const buy_support = ['دارد','ندارد'];
-const pay_method = ['سیر فروش (فاکتور یکجا)','سیر فروش (فاکتور تدریجی)','چند ماهه'];
-
-export default function Suppliers() {
+    const countries = [
+        {code: 'AD', label: 'Andorra', phone: '376'},
+        {code: 'AE', label: 'United Arab Emirates', phone: '971'},
+        {code: 'AF', label: 'Afghanistan', phone: '93'},
+        {code: 'AG', label: 'Antigua and Barbuda', phone: '1-268'},
+        {code: 'AI', label: 'Anguilla', phone: '1-264'},
+    ];
     const classes = useStyles();
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
     return (
         <div className="row mx-0 my-4">
-            <Grid container spacing={1}>
-                <Grid item xs={12} lg={12}>
-                    <Card className="p-4 mb-4">
-                        <div className="d-flex justify-content-between ">
-                            <span className="font-size-lg font-weight-bold">
-                            {/*<Link to="/suppliers.index"> <FcPlus /> </Link>*/}
-                                تامین کنندگان
-                        </span>
-                            <div>
-                                <IconButton color="secondary" aria-label="add an alarm">
-                                    <FcExport />
-                                </IconButton>
-                                <IconButton color="secondary" aria-label="add an alarm">
-                                    <FcSearch />
-                                </IconButton>
+            <Grid spacing={1}>
+                <Card className="px-3 pb-4 pt-3 mb-4">
+                    <div className="font-size-lg font-weight-bold">
+                        {/*<Link to="/suppliers.index"> <FcPlus /></Link>*/}
+                         تامین کنندگان
+                    </div>
+                    <Divider className="my-2"/>
+                    <Grid container spacing={4}>
+                        <Grid item xs={12} lg={3}>
 
-                            </div>
-                        </div>
+                            <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
+                                       className="mt-3" id="outlined-textarea"
+                                       label="نام تامین کننده"
+                                       placeholder="نام تامین کننده" variant="outlined"/>
 
-
-                        <Divider className="my-3"/>
-                        <Grid container spacing={4}>
-                            <Grid item xs={12} lg={3}>
-                                <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
-                                           className="m-2" id="outlined-textarea"
-                                           label="نام تامین کننده"
-                                           placeholder="نام تامین کننده" variant="outlined"/>
-                                <Autocomplete fullWidth
+                            <Autocomplete fullWidth
                                               size="small"
                                               id="country-select-demo"
-                                              className="m-2"
-                                              options={options}
+                                              className="mt-3"
+                                              options={countries}
                                               classes={{
                                                   option: classes.option,
                                               }}
                                               autoHighlight
-                                              getOptionLabel={(option) => option}
+                                              getOptionLabel={(option) => option.label}
                                               renderOption={(option) => (
                                                   <React.Fragment>
-                                                      <span>{option}</span>
+                                                      <span>{countryToFlag(option.code)}</span>
+                                                      {option.label} ({option.code}) +{option.phone}
                                                   </React.Fragment>
                                               )}
                                               renderInput={(params) => (
@@ -261,226 +154,303 @@ export default function Suppliers() {
                                                       variant="outlined"
                                                       inputProps={{
                                                           ...params.inputProps,
-                                                          autoComplete: '',
+                                                          autoComplete: 'new-password',
                                                       }}
                                                   />
                                               )}
-                                />
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={confirm}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(confirm) => confirm}
-                                              renderOption={(confirm) => (
-                                                  <React.Fragment>
-                                                      <span>{confirm}</span>
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="وضعیت تائید"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: '',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                            </Grid>
-                            <Grid item xs={12} lg={3}>
-                                <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
-                                           className="m-2" id="outlined-textarea"
-                                           label="کد تامین کننده"
-                                           placeholder="کد تامین کننده" variant="outlined"/>
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={type_supplier}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(type_supplier) => type_supplier}
-                                              renderOption={(type_supplier) => (
-                                                  <React.Fragment>
-                                                      <span>{type_supplier}</span>
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="نوع تامین کننده"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: '',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={type_buy}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(type_buy) => type_buy}
-                                              renderOption={(type_buy) => (
-                                                  <React.Fragment>
-                                                      <span>{type_buy}</span>
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="نوع تامین کننده"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: '',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                            </Grid>
-                            <Grid item xs={12} lg={3}>
-                                <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
-                                           className="m-2" id="outlined-textarea"
-                                           label="کد حسابداری"
-                                           placeholder="کد حسابداری" variant="outlined"/>
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={value_added}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(value_added) => value_added}
-                                              renderOption={(value_added) => (
-                                                  <React.Fragment>
-                                                      <span>{value_added}</span>
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="ارزش افزوده"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: '',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={value_added}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(type_factor) => type_factor}
-                                              renderOption={(type_factor) => (
-                                                  <React.Fragment>
-                                                      <span>{type_factor}</span>
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="نوع فاکتور"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: '',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                            </Grid>
-                            <Grid item xs={12} lg={3}>
-                                <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
-                                           className="m-2" id="outlined-textarea"
-                                           label="کد کیان"
-                                           placeholder="کد کیان" variant="outlined"/>
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={value_added}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(buy_support) => buy_support}
-                                              renderOption={(buy_support) => (
-                                                  <React.Fragment>
-                                                      <span>{buy_support}</span>
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="تقبل مسئولیت خرید"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: '',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                                <Autocomplete fullWidth
-                                              size="small"
-                                              id="country-select-demo"
-                                              className="m-2"
-                                              options={value_added}
-                                              classes={{
-                                                  option: classes.option,
-                                              }}
-                                              autoHighlight
-                                              getOptionLabel={(pay_method) => pay_method}
-                                              renderOption={(pay_method) => (
-                                                  <React.Fragment>
-                                                      <span>{pay_method}</span>
-                                                  </React.Fragment>
-                                              )}
-                                              renderInput={(params) => (
-                                                  <TextField
-                                                      {...params}
-                                                      label="روش پرداخت"
-                                                      variant="outlined"
-                                                      inputProps={{
-                                                          ...params.inputProps,
-                                                          autoComplete: '',
-                                                      }}
-                                                  />
-                                              )}
-                                />
-                            </Grid>
+                        />
+
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="وضعیت تایید"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+
                         </Grid>
-                        <Divider className="my-4"/>
+                        <Grid item xs={12} lg={3}>
+                            <TextField fullWidth InputLabelProps={{shrink: true}} className="mt-3"
+                                       id="outlined-multiline-flexible" label="کد تامین کننده"
+                                       size="small" variant="outlined"/>
 
+                            {/*<FormControl size="small" fullWidth variant="outlined"*/}
+                            {/*className={classes.formControl}>*/}
+                            {/*<InputLabel htmlFor="outlined-age-native-simple">نوع فاکتور</InputLabel>*/}
+                            {/*<Select*/}
+                            {/*fullWidth*/}
+                            {/*label="نوع فاکتور"*/}
+                            {/*value={personName}*/}
+                            {/*onChange={handleChange}*/}
+                            {/*inputProps={{*/}
+                            {/*name: 'نوع فاکتور',*/}
+                            {/*id: 'outlined-age-native-simple',*/}
+                            {/*}}*/}
+                            {/*MenuProps={MenuProps}*/}
+                            {/*>*/}
+                            {/*{names.map((name) => (*/}
+                            {/*<MenuItem key={name} value={name}*/}
+                            {/*style={getStyles(name, personName, theme)}>*/}
+                            {/*{name}*/}
+                            {/*</MenuItem>*/}
+                            {/*))}*/}
+                            {/*</Select>*/}
+                            {/*</FormControl>*/}
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="نوع تامین کننده"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="نوع خرید"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+                        </Grid>
+                        <Grid item xs={12} lg={3}>
+                            <TextField fullWidth InputLabelProps={{shrink: true}} size="small"
+                                       className="mt-3" id="outlined-textarea"
+                                       label="کد حسابداری"
+                                       placeholder="کد حسابداری" variant="outlined"/>
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="ارزش افزوده"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
 
-                    </Card>
-                </Grid>
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="نوع فاکتور"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+                        </Grid>
+                        <Grid item xs={12} lg={3}>
+                            <TextField fullWidth InputLabelProps={{shrink: true}} className="mt-3"
+                                       id="outlined-multiline-flexible"
+                                       label="کد کیان"
+                                       size="small" placeholder="کد تامین کننده"
+                                       variant="outlined"/>
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="تقبل مسئولیت خرید"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+
+                            <Autocomplete fullWidth
+                                          size="small"
+                                          id="country-select-demo"
+                                          className="mt-3"
+                                          options={countries}
+                                          classes={{
+                                              option: classes.option,
+                                          }}
+                                          autoHighlight
+                                          getOptionLabel={(option) => option.label}
+                                          renderOption={(option) => (
+                                              <React.Fragment>
+                                                  <span>{countryToFlag(option.code)}</span>
+                                                  {option.label} ({option.code}) +{option.phone}
+                                              </React.Fragment>
+                                          )}
+                                          renderInput={(params) => (
+                                              <TextField
+                                                  {...params}
+                                                  label="روش پرداخت"
+                                                  variant="outlined"
+                                                  inputProps={{
+                                                      ...params.inputProps,
+                                                      autoComplete: 'new-password',
+                                                  }}
+                                              />
+                                          )}
+                            />
+
+                        </Grid>
+
+                    </Grid>
+                </Card>
             </Grid>
+            <Paper className={classes.root}>
+                <TableContainer className={classes.container}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                                return (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                        {columns.map((column) => {
+                                            const value = row[column.id];
+                                            return (
+                                                <TableCell key={column.id} align={column.align}>
+                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                </TableCell>
+                                            );
+                                        })}
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper>
         </div>
+
     );
 }
