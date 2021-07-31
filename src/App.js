@@ -15,6 +15,7 @@ import UsersEdit from "./view/users/form";
 const jss = create({plugins: [...jssPreset().plugins, rtl()]});
 
 const theme = createTheme({
+
     direction: 'rtl',
     typography: {
         fontFamily: ['"sans"'].join(','),

@@ -18,6 +18,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import ListItemText from '@material-ui/core/ListItemText';
+import Chip from '@material-ui/core/Chip';
 
 import {
     Grid,
@@ -30,13 +31,21 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        '& > *': {
+            margin: theme.spacing(0.5),
+        },
+    },
     formControl: {
         margin: theme.spacing(1),
     },
     option: {
         fontSize: 13,
         '& > span': {
-            fontSize: 16,
+            fontSize: 1,
         },
     },
     button: {
@@ -109,33 +118,32 @@ function a11yProps(index) {
         'aria-controls': `scrollable-force-tabpanel-${index}`,
     };
 }
+
 export default function UsersEdit() {
     const [value, setValue] = React.useState(0);
+
     const [personName, setPersonName] = React.useState([]);
 
+    const [chipData, setChipData] = React.useState([]);
+
+    const handleDelete = (chipToDelete) => () => {
+        setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    };
     const handleSelectChange = (event) => {
-        setPersonName(event.target.value);
+        setChipData(event.target.value);
     };
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        setPersonName(newValue);
     };
     const handleselectedFile = (prop) => () => {
         setValues({...values, [prop]: fileInput.current.value.split('C:\\fakepath\\')});
     };
-    const handleChangeMultiple = (event) => {
-        const { options } = event.target;
-        const value = [];
-        for (let i = 0, l = options.length; i < l; i += 1) {
-            if (options[i].selected) {
-                value.push(options[i].value);
-            }
-        }
-        setPersonName(value);
-    };
+
     const [values, setValues] = React.useState({
         selectedFile: '',
         // setSelectedFile: '',
     });
+
     const fileInput = React.useRef(null);
 
     const classes = useStyles();
@@ -290,14 +298,14 @@ export default function UsersEdit() {
                                             }}
                                             multiple
                                             label="فروشگاه ها"
-                                            value={personName}
+                                            value={chipData}
                                             onChange={handleSelectChange}
-                                            renderValue={(selected) => selected.join(', ')}
+                                            renderValue={(selected) => selected.map(val => <Chip  className="m-lg-1 ms-xl-1"  key={val} onDelete={handleDelete(val)} label={val} />)}
                                             MenuProps={MenuProps}
                                         >
                                             {names.map((name) => (
                                                 <MenuItem key={name} value={name}>
-                                                    <Checkbox checked={personName.indexOf(name) > -1} />
+                                                    <Checkbox  color="primary" checked={chipData.indexOf(name) > -1} />
                                                     <ListItemText primary={name} />
                                                 </MenuItem>
                                             ))}
