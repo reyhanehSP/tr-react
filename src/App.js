@@ -15,6 +15,7 @@ import UsersEdit from "./view/users/form";
 const jss = create({plugins: [...jssPreset().plugins, rtl()]});
 
 const theme = createTheme({
+
     direction: 'rtl',
     typography: {
         fontFamily: ['"sans"'].join(','),
@@ -66,6 +67,7 @@ class App extends React.Component {
                                 {tokenUsers && <Route path="/dashboard" component={Dashboard}/>}
                                 <Route exact path="/login" component={Login}/>
 
+                                /* Supplier */
                                 {tokenUsers ? <Redirect from="/suppliers.index" to="/suppliers"/> :
                                     <Redirect from={'*'} to="/login"/>}
                                 {tokenUsers && <Route path="/suppliers" component={Suppliers}/>}
@@ -74,6 +76,7 @@ class App extends React.Component {
                                     <Redirect from={'*'} to="/login"/>}
                                 {tokenUsers && <Route path="/suppliersForm" component={SuppliersEdit}/>}
 
+                                /* Users */
                                 {tokenUsers ? <Redirect from="/users.index" to="/users"/> :
                                     <Redirect from={'*'} to="/login"/>}
                                 {tokenUsers && <Route path="/users" component={Users}/>}
@@ -81,6 +84,7 @@ class App extends React.Component {
                                 {tokenUsers ? <Redirect from="/users.create" to="/usersForm"/> :
                                     <Redirect from={'*'} to="/login"/>}
                                 {tokenUsers && <Route path="/usersForm" component={UsersEdit}/>}
+
                             </Switch>
                         </div>
                 </StylesProvider>
