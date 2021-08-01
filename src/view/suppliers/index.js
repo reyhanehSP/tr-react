@@ -429,7 +429,6 @@ export default function Suppliers() {
                             />
 
                         </Grid>
-
                     </Grid>
                 </Card>
             </Grid>
@@ -478,6 +477,5 @@ export default function Suppliers() {
                 />
             </Paper>
         </div>
-
     );
 }

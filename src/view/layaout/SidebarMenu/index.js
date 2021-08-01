@@ -18,7 +18,7 @@ class Menu extends React.Component {
     render() {
         return (
             <header className="header">
-                <div id="effect-menu" ></div>
+                <div id="effect-menu"></div>
                 <div className="col-md-12">
                     <div className="top-header">
                         <div className="col-md-2 section-one">

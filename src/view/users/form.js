@@ -7,18 +7,21 @@ import {GrUserAdd} from "@react-icons/all-files/gr/GrUserAdd";
 import {GrSchedule} from "@react-icons/all-files/gr/GrSchedule";
 import {FcUpload} from "@react-icons/all-files/fc/FcUpload";
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import ListItemText from '@material-ui/core/ListItemText';
 import Chip from '@material-ui/core/Chip';
-
+import Tabs from '@material-ui/core/Tabs';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import {
     Grid,
     Card,
@@ -37,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
             margin: theme.spacing(0.5),
         },
+    },
+    textField: {
+        width: '25ch',
     },
     formControl: {
         margin: theme.spacing(1),
@@ -79,41 +85,55 @@ const names = [
     'Kelly Snyder',
 ];
 
+function LinkTab(props) {
+    return (
+        <Tab
+            component="a"
+            onClick={(event) => {
+                event.preventDefault();
+            }}
+            {...props}
+        />
+    );
+}
 
 function TabPanel(props) {
-    const {value, index, ...other} = props;
+    const { children, value, index, ...other } = props;
+
     return (
         <div
             role="tabpanel"
             hidden={value !== index}
-            id={`scrollable-force-tabpanel-${index}`}
-            aria-labelledby={`scrollable-force-tab-${index}`}
+            id={`nav-tabpanel-${index}`}
+            aria-labelledby={`nav-tab-${index}`}
             {...other}
         >
+            {value === index && (
+                <Box p={3}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
         </div>
     );
 }
 
 TabPanel.propTypes = {
+    children: PropTypes.node,
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
     return {
-        id: `scrollable-force-tab-${index}`,
-        'aria-controls': `scrollable-force-tabpanel-${index}`,
+        id: `scrollable-prevent-tab-${index}`,
+        'aria-controls': `scrollable-prevent-tabpanel-${index}`,
     };
 }
 
 export default function UsersEdit() {
     const classes = useStyles();
-
     const [value, setValue] = React.useState(0);
 
-
-
-    const [personName, setPersonName] = React.useState([]);
 
     const [chipData, setChipData] = React.useState([]);
 
@@ -134,18 +154,36 @@ export default function UsersEdit() {
     const handleSelectChange = (event) => {
         setChipData(event.target.value);
     };
-    const handleChange = (event, newValue) => {
-        setPersonName(newValue);
-    };
+
     const handleselectedFile = (prop) => () => {
         setValues({...values, [prop]: fileInput.current.value.split('C:\\fakepath\\')});
     };
 
     const [values, setValues] = React.useState({
+        text: '',
+        phone : '',
+        password: '',
+        showPassword: '',
         selectedFile: '',
-        // setSelectedFile: '',
+        errorText: '',
+        currentPassword:{show:false,password:''},
+        confirmPassword :{show:false,password:''}
     });
+    const handleChange = (e, prop) =>{
+        setValues({ ...values, [prop]: e.target.value});
+        console.log(e.target.value)
+    };
+    const handleClickShowPassword = (fieldName) => () => {
+        setValues({ ...values, showPassword: fieldName === values.showPassword ? "" : fieldName});
+    };
+    const onSubmit = (fieldName) => (e) => {
+        e.preventDefault();
 
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
     const fileInput = React.useRef(null);
 
     const departList = React.useRef(null);
@@ -156,22 +194,24 @@ export default function UsersEdit() {
         {id:2 , label: 'خرید-بازار'},
         {id:3 , label: 'تامین کنندگان'},
     ];
+
     return (
 
         <div className="row mx-0 my-3">
+            <form>
             <Grid spacing={1}>
                 <Card className="px-3 pb-3">
                     <Tabs
                         value={value}
-                        onChange={handleChange}
+                        onChange={(event, newValue) => setValue(newValue)}
                         variant="fullWidth"
                         scrollButtons="on"
                         indicatorColor="primary"
                         textColor="primary"
                         aria-label="scrollable force tabs example"
                     >
-                        <Tab label="افزودن کاربر" icon={<GrUserAdd/>} {...a11yProps(0)} />
-                        <Tab label="احکام محاسبات" icon={<GrSchedule/>} {...a11yProps(1)} />
+                        <LinkTab  label="افزودن کاربر" icon={<GrUserAdd/>} {...a11yProps(0)} />
+                        <LinkTab  label="احکام محاسبات" icon={<GrSchedule/>}{...a11yProps(1)} />
                     </Tabs>
                     <Divider className="mb-3"/>
                     <TabPanel value={value} index={0}>
@@ -180,10 +220,13 @@ export default function UsersEdit() {
                                 <Grid item xs={12} lg={3}>
                                     <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
                                                id="outlined-multiline-flexible" label="نام"
+                                               required={true}
+                                               onChange={handleChange}
                                                size="small" variant="outlined"/>
 
                                     <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
                                                id="outlined-multiline-flexible" label="تلفن"
+                                               onChange={handleChange}
                                                size="small" variant="outlined"/>
                                     <Autocomplete fullWidth
                                                   size="small"
@@ -262,11 +305,29 @@ export default function UsersEdit() {
                                                label="کد پرسنلی"
                                                size="small" placeholder="کد پرسنلی"
                                                variant="outlined"/>
-                                    <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
-                                               id="outlined-multiline-flexible"
-                                               label="رمز عبور"
-                                               size="small" placeholder="رمز عبور"
-                                               variant="outlined"/>
+
+                                    <FormControl fullWidth size="small" className="m-2" variant="outlined">
+                                        <InputLabel htmlFor="password">رمز عبور</InputLabel>
+                                        <OutlinedInput
+                                            id="password"
+                                            type={values.showPassword === 'currentPassword' ? 'text' : 'password'}
+                                            value={values.password}
+                                            // onChange={handleChange('password')}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={handleClickShowPassword('currentPassword')}
+                                                        onMouseDown={handleMouseDownPassword}
+                                                        edge="end"
+                                                    >
+                                                        {values.showPassword === 'currentPassword' ? <Visibility /> : <VisibilityOff />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                            labelWidth={70}
+                                        />
+                                    </FormControl>
 
 
                                 </Grid>
@@ -278,10 +339,28 @@ export default function UsersEdit() {
                                                placeholder="تاریخ ترک کار" variant="outlined"/>
 
 
-                                    <TextField fullWidth InputLabelProps={{shrink: true}} className="m-2"
-                                               id="outlined-multiline-flexible" label="تکرار رمز عبور"
-                                               placeholder="تکرار رمز عبور" size="small" value="" onChange=""
-                                               variant="outlined"/>
+                                    <FormControl fullWidth size="small" className="m-2" variant="outlined">
+                                        <InputLabel htmlFor="c-password">تکرار رمز عبور</InputLabel>
+                                        <OutlinedInput
+                                            id="c-password"
+                                            type={values.showPassword === 'confirmPassword' ? 'text' : 'password'}
+                                            value={values.password}
+                                            // onChange={handleChange('c-password')}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={handleClickShowPassword('confirmPassword')}
+                                                        onMouseDown={handleMouseDownPassword}
+                                                        edge="end"
+                                                    >
+                                                        {values.showPassword === 'confirmPassword' ? <Visibility /> : <VisibilityOff />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                            labelWidth={70}
+                                        />
+                                    </FormControl>
 
                                 </Grid>
                                 <Grid className="py-0" item xs={12} lg={12}>
@@ -381,7 +460,7 @@ export default function UsersEdit() {
                             </Grid>
                             <Divider className="my-4"/>
                             <div className="col-xs-12">
-                                <Button variant="contained" color="primary" className={classes.button}
+                                <Button  onClick={onSubmit} variant="contained" color="primary" className={classes.button}
                                         startIcon={<FcFile/>}>
                                     ذخیره
                                 </Button>
@@ -393,6 +472,7 @@ export default function UsersEdit() {
                     </TabPanel>
                 </Card>
             </Grid>
+            </form>
         </div>
     );
 }
