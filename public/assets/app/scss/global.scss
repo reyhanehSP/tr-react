@@ -110,3 +110,11 @@ hr{
   transition: all .2s ease-in-out;
   opacity: 1;
 }
+.errorText{
+  .MuiInputBase-root{
+    .MuiOutlinedInput-notchedOutline{
+      border-Color: red !important;
+    }
+  }
+
+}

@@ -87,29 +87,28 @@ class Children extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: [this.props.id, false],
+            isOpen: [this.props.id],
             activeId: null,
             isActive : false,
-            effectMenu : 'de-active'
+            effectMenu : 'de-active',
+            close: null
         };
     }
 
     subMenu = (id) => {
-        this.setState({
-            isActive : true,
-            effectMenu : 'active'
-        })
+        this.setState(prevState => ({ isActive: !prevState.isActive }))
+        console.log("id " , id.currentTarget.getAttribute('keys'))
     };
     render() {
         return (
             this.props.children.sub ?
-                <li url={this.props.url} liKeys={this.state.isOpen}
+                <li url={this.props.url} Keys={this.state.isOpen} onClick={this.subMenu}
                     className='hasSub'>
-                    <a linkUrl={this.props.url} onClick={this.subMenu}>{this.props.children.name}</a>
+                    <a linkUrl={this.props.url}  >{this.props.children.name}</a>
                     <ul className={this.state.isActive  ? 'open-submenu' : 'close-submenu'}>{renderChild(this.props.children.sub)}</ul>
                 </li>
                 :
-                <li url={this.props.url} liKeys={this.state.isOpen} className='noSub'>
+                <li url={this.props.url} Keys={this.state.isOpen} className='noSub'>
                     <Link activeClassName="selected" to={this.props.url}>{this.props.children.name}</Link>
                 </li>
 

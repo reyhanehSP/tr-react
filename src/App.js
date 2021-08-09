@@ -11,6 +11,8 @@ import Suppliers from "./view/suppliers/index";
 import SuppliersEdit from "./view/suppliers/form";
 import Users from "./view/users/index";
 import UsersEdit from "./view/users/form";
+import DateFnsUtils from '@date-io/date-fns';
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 
 const jss = create({plugins: [...jssPreset().plugins, rtl()]});
 
@@ -20,6 +22,10 @@ const theme = createTheme({
     typography: {
         fontFamily: ['"sans"'].join(','),
         fontSize: 12,
+        subtitle1: {
+            fontSize: 14,
+            fontWeight: 'bold'
+        },
     },
 
     palette: {
@@ -59,6 +65,7 @@ class App extends React.Component {
         let tokenUsers = localStorage.getItem("token");
         return (
             <Router>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <ThemeProvider theme={theme}>
                 <StylesProvider jss={jss}>
                         <div className="App">
@@ -89,6 +96,7 @@ class App extends React.Component {
                         </div>
                 </StylesProvider>
                 </ThemeProvider>
+                </MuiPickersUtilsProvider>
             </Router>
         )
     }

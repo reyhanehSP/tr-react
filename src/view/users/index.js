@@ -24,6 +24,10 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import ExitToApp from "@material-ui/core/SvgIcon/SvgIcon";
+import FormControl from "@material-ui/core/FormControl/FormControl";
+import InputLabel from "@material-ui/core/InputLabel/InputLabel";
+import OutlinedInput from "@material-ui/core/OutlinedInput/OutlinedInput";
+import InputAdornment from "@material-ui/core/InputAdornment/InputAdornment";
 
 const columns = [
     {id: 'name', label: 'Name', minWidth: 170},
