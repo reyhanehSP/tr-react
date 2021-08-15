@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import {useForm} from "react-hook-form";
@@ -27,16 +27,9 @@ import LinkTwoToneIcon from '@material-ui/icons/LinkTwoTone';
 import DescriptionTwoToneIcon from '@material-ui/icons/DescriptionTwoTone';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+import { CKEditor } from 'ckeditor4-react';
 
-ClassicEditor.create(document.getElementById("editor"), {
-    plugins: [  Paragraph, Bold, Italic ],
-    toolbar: [ 'bold', 'italic', 'undo', 'redo' ]
-});
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -494,10 +487,8 @@ export default function ProductsEdit() {
                                             </Select
                                             >
                                         </FormControl>
-                                        {/*<CKEditor*/}
-                                            {/*editor={ ClassicEditor }*/}
-                                            {/*data="<p>Hello from CKEditor 5!</p>"*/}
-                                        {/*/>*/}
+                                        <CKEditor data="<p>Hello from CKEditor 4!</p>" />
+
                                     </Grid>
                                     <Grid item xs={12} lg={12} container spacing={1}>
                                         <Grid item xs={12} lg={2}>
