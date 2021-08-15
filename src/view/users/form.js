@@ -4,21 +4,18 @@ import {makeStyles, ThemeProvider} from '@material-ui/core/styles';
 import {useForm} from "react-hook-form";
 import IconButton from '@material-ui/core/IconButton';
 import {FcFile} from "@react-icons/all-files/fc/FcFile";
-import {GrUserAdd} from "@react-icons/all-files/gr/GrUserAdd";
-import {GrSchedule} from "@react-icons/all-files/gr/GrSchedule";
+import PersonAddTwoToneIcon from '@material-ui/icons/PersonAddTwoTone';
+import CalendarTodayTwoToneIcon from '@material-ui/icons/CalendarTodayTwoTone';
 import {FcUpload} from "@react-icons/all-files/fc/FcUpload";
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import Tab from '@material-ui/core/Tab';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -219,8 +216,8 @@ export default function UsersEdit() {
                             textColor="primary"
                             aria-label="scrollable force tabs example"
                         >
-                            <LinkTab label="افزودن کاربر" icon={<GrUserAdd/>} {...a11yProps(0)} />
-                            <LinkTab label="احکام محاسبات" icon={<GrSchedule/>}{...a11yProps(1)} />
+                            <LinkTab label="افزودن کاربر" icon={<PersonAddTwoToneIcon/>} {...a11yProps(0)} />
+                            <LinkTab label="احکام محاسبات" icon={<CalendarTodayTwoToneIcon/>}{...a11yProps(1)} />
                         </Tabs>
                         <Divider className="mb-3"/>
                         <TabPanel value={value} index={0}>
