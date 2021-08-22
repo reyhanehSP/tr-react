@@ -484,8 +484,7 @@ export default function ProductsEdit() {
                                                         <ListItemText primary={name}/>
                                                     </MenuItem>
                                                 ))}
-                                            </Select
-                                            >
+                                            </Select>
                                         </FormControl>
                                         <CKEditor data="<p>Hello from CKEditor 4!</p>" />
 
