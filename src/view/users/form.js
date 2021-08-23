@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles, ThemeProvider} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import {useForm} from "react-hook-form";
 import IconButton from '@material-ui/core/IconButton';
 import {FcFile} from "@react-icons/all-files/fc/FcFile";
@@ -463,7 +463,6 @@ export default function UsersEdit() {
                                                                    onstyle="warning"/>
                                         </Grid>
                                     </Grid>
-
                                     <Grid className="py-0" item xs={12} lg={12}>
                                         <input accept="image/*"
                                                className={classes.input}

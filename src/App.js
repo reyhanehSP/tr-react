@@ -14,6 +14,8 @@ import Users from "./view/users/index";
 import UsersEdit from "./view/users/form";
 import Products from "./view/products/index";
 import ProductsEdit from "./view/products/form";
+import Roles from "./view/roles/index";
+import RolesEdit from "./view/roles/form";
 import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 
@@ -112,6 +114,15 @@ class App extends React.Component {
                                 {tokenUsers ? <Redirect from="/products.add" to="/productsForm"/> :
                                     <Redirect from={'*'} to="/login"/>}
                                 {tokenUsers && <Route path="/productsForm" component={ProductsEdit}/>}
+
+                                /* roles */
+                                {tokenUsers ? <Redirect from="/roles.index" to="/roles"/> :
+                                    <Redirect from={'*'} to="/login"/>}
+                                {tokenUsers && <Route path="/roles" component={Roles}/>}
+
+                                {tokenUsers ? <Redirect from="/roles.create" to="/rolesForm"/> :
+                                    <Redirect from={'*'} to="/login"/>}
+                                {tokenUsers && <Route path="/rolesForm" component={RolesEdit}/>}
 
                             </Switch>
                         </div>
