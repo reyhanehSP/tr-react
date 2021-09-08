@@ -69,72 +69,15 @@ const theme = createTheme({
 
 class App extends React.Component {
     render() {
-        let tokenUsers = localStorage.getItem("token");
         return (
             <Router>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <ThemeProvider theme={theme}>
                 <StylesProvider jss={jss}>
                         <div className="App">
-                            <Menu/>
                             <Switch>
-                                {tokenUsers && <Route path="/dashboard" component={Dashboard}/>}
-                                <Route exact path="/login" component={Login}/>
-
-                                /* departman */
-                                {tokenUsers ? <Redirect from="/departments.index" to="/departments"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/departments" component={Departmants}/>}
-
-                                {tokenUsers ? <Redirect from="/suppliers.create" to="/suppliersForm"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/suppliersForm" component={SuppliersEdit}/>}
-
-                                /* Supplier */
-                                {tokenUsers ? <Redirect from="/suppliers.index" to="/suppliers"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/suppliers" component={Suppliers}/>}
-
-                                {tokenUsers ? <Redirect from="/suppliers.create" to="/suppliersForm"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/suppliersForm" component={SuppliersEdit}/>}
-
-                                /* Users */
-                                {tokenUsers ? <Redirect from="/users.index" to="/users"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/users" component={Users}/>}
-
-                                {tokenUsers ? <Redirect from="/users.create" to="/usersForm"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/usersForm" component={UsersEdit}/>}
-
-                                /* Products */
-                                {tokenUsers ? <Redirect from="/products.index" to="/products"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/products" component={Products}/>}
-
-                                {tokenUsers ? <Redirect from="/products.add" to="/productsForm"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/productsForm" component={ProductsEdit}/>}
-
-                                /* roles */
-                                {tokenUsers ? <Redirect from="/roles.index" to="/roles"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/roles" component={Roles}/>}
-
-                                {tokenUsers ? <Redirect from="/roles.create" to="/rolesForm"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/rolesForm" component={RolesEdit}/>}
-
-                                /* shops */
-                                {tokenUsers ? <Redirect from="/shops.index" to="/shops"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/shops" component={Shops}/>}
-
-                                {tokenUsers ? <Redirect from="/shops.create" to="/shopsForm"/> :
-                                    <Redirect from={'*'} to="/login"/>}
-                                {tokenUsers && <Route path="/shopsForm" component={ShopsEdit}/>}
-
+                                <Route exact path="/(login)" component={LoginContainer}/>
+                                <Route component={DefaultContainer}/>
                             </Switch>
                         </div>
                 </StylesProvider>
@@ -144,5 +87,84 @@ class App extends React.Component {
         )
     }
 }
+class LoginContainer extends React.Component {
+    render() {
+        return (
+            <div>
+                <Route exact path="/" render={() => <Redirect to="/login"/>}/>
+                <Route path="/login" component={Login}/>
+            </div>
+        )
+    }
+}
+class DefaultContainer extends React.Component {
+    render() {
+        let tokenUsers = localStorage.getItem("token");
 
+        return (
+
+            <div>
+                <Menu/>
+                <Switch>
+                {tokenUsers && <Route path="/dashboard" component={Dashboard}/>}
+                <Route exact path="/login" component={Login}/>
+
+                /* departman */
+                {tokenUsers ? <Redirect from="/departments.index" to="/departments"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/departments" component={Departmants}/>}
+
+                {tokenUsers ? <Redirect from="/suppliers.create" to="/suppliersForm"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/suppliersForm" component={SuppliersEdit}/>}
+
+                /* Supplier */
+                {tokenUsers ? <Redirect from="/suppliers.index" to="/suppliers"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/suppliers" component={Suppliers}/>}
+
+                {tokenUsers ? <Redirect from="/suppliers.create" to="/suppliersForm"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/suppliersForm" component={SuppliersEdit}/>}
+
+                /* Users */
+                {tokenUsers ? <Redirect from="/users.index" to="/users"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/users" component={Users}/>}
+
+                {tokenUsers ? <Redirect from="/users.create" to="/usersForm"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/usersForm" component={UsersEdit}/>}
+
+                /* Products */
+                {tokenUsers ? <Redirect from="/products.index" to="/products"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/products" component={Products}/>}
+
+                {tokenUsers ? <Redirect from="/products.add" to="/productsForm"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/productsForm" component={ProductsEdit}/>}
+
+                /* roles */
+                {tokenUsers ? <Redirect from="/roles.index" to="/roles"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/roles" component={Roles}/>}
+
+                {tokenUsers ? <Redirect from="/roles.create" to="/rolesForm"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/rolesForm" component={RolesEdit}/>}
+
+                /* shops */
+                {tokenUsers ? <Redirect from="/shops.index" to="/shops"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/shops" component={Shops}/>}
+
+                {tokenUsers ? <Redirect from="/shops.create" to="/shopsForm"/> :
+                    <Redirect from={'*'} to="/login"/>}
+                {tokenUsers && <Route path="/shopsForm" component={ShopsEdit}/>}
+                </Switch>
+            </div>
+        )
+    }
+}
 export default App;
