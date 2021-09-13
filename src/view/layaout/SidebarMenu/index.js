@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import data from "../../../config/sidebar";
 import logo from "./150-150.png";
@@ -50,16 +50,16 @@ class Menu extends React.Component {
                         </div>
                         <div className="col-md-2 text-lg-end">
                             <IconButton color="secondary" aria-label="add an alarm">
-                                <ExitToApp />
+                                <ExitToApp/>
                             </IconButton>
                             <IconButton color="secondary" aria-label="add an alarm">
-                                <ShoppingBasket />
+                                <ShoppingBasket/>
                             </IconButton>
                             <IconButton color="secondary" aria-label="add an alarm">
-                                <Security />
+                                <Security/>
                             </IconButton>
                             <IconButton color="secondary" aria-label="add an alarm">
-                                <Alarm />
+                                <Alarm/>
                             </IconButton>
                         </div>
                     </div>
@@ -86,25 +86,32 @@ class Children extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: [this.props.id],
-            activeId: null,
-            isActive : false,
-            effectMenu : 'de-active',
-            close: null
+            open: null,
+            isActive: false,
         };
     }
 
     subMenu = (id) => {
-        this.setState(prevState => ({ isActive: !prevState.isActive }))
-        console.log("id " , id.currentTarget.getAttribute('keys'))
+        let isActive = !this.state.isActive;
+        this.setState({
+            open: id.currentTarget.getAttribute('keys'),
+            isActive: isActive,
+        })
     };
+
     render() {
         return (
             this.props.children.sub ?
-                <li url={this.props.url} Keys={this.state.isOpen} onClick={this.subMenu}
-                    className='hasSub'>
-                    <a linkUrl={this.props.url}  >{this.props.children.name}</a>
-                    <ul className={this.state.isActive  ? 'open-submenu' : 'close-submenu'}>{renderChild(this.props.children.sub)}</ul>
+                <li url={this.props.url} Keys={this.props.id} onClick={this.subMenu} className='hasSub'>
+                    <a linkUrl={this.props.url}>{this.props.children.name}</a>
+
+                    {/*{(this.state.open == this.props.id) && (*/}
+                        <ul className='open-submenu'>
+                            {renderChild(this.props.children.sub)}
+                        </ul>
+                        {/*)*/}
+                    {/*}*/}
+
                 </li>
                 :
                 <li url={this.props.url} Keys={this.state.isOpen} className='noSub'>
