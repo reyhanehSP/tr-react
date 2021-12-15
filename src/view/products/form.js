@@ -96,7 +96,6 @@ function LinkTab(props) {
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
-
     return (
         <div
             role="tabpanel"
@@ -140,7 +139,6 @@ export default function ProductsEdit() {
         checkedF: true,
         checkedG: true,
     });
-
 
     const [chipData, setChipData] = React.useState([]);
     const handleDelete = (chipToDelete) => () => {
@@ -201,7 +199,6 @@ export default function ProductsEdit() {
     const onSubmit = data => console.log(data);
     // console.log(watch("example")); // watch input value by passing the name of it
     return (
-
         <div className="row mx-0 my-3">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid spacing={1}>
@@ -213,14 +210,12 @@ export default function ProductsEdit() {
                             scrollButtons="on"
                             indicatorColor="primary"
                             textColor="primary"
-                            aria-label="scrollable force tabs example"
-                        >
+                            aria-label="scrollable force tabs example">
                             <LinkTab label="افزودن کالا" icon={<AddBoxTwoToneIcon/>} {...a11yProps(0)} />
                             <LinkTab label="تصاویر" icon={<AddPhotoAlternateTwoToneIcon/>}{...a11yProps(1)} />
                             <LinkTab label="کالاهای مرتبط" icon={<LibraryBooksTwoToneIcon/>}{...a11yProps(2)} />
                             <LinkTab label="کالاهای مشابه" icon={<LibraryAddCheckTwoToneIcon/>}{...a11yProps(3)} />
-                            <LinkTab label="اطلاعات کالای تامین کننده"
-                                     icon={<PersonPinTwoToneIcon/>}{...a11yProps(4)} />
+                            <LinkTab label="اطلاعات کالای تامین کننده" icon={<PersonPinTwoToneIcon/>}{...a11yProps(4)} />
                             <LinkTab label="لینک ها" icon={<LinkTwoToneIcon/>}{...a11yProps(5)} />
                             <LinkTab label="ویژگی ها" icon={<DescriptionTwoToneIcon/>}{...a11yProps(6)} />
                         </Tabs>
@@ -521,7 +516,6 @@ export default function ProductsEdit() {
                                                                    onstyle="warning"/>
                                         </Grid>
                                     </Grid>
-
                                     <Grid className="py-0" item xs={12} lg={12}>
                                         <input accept="image/*"
                                                className={classes.input}
@@ -548,6 +542,7 @@ export default function ProductsEdit() {
                             </Grid>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
+
                         </TabPanel>
                     </Card>
                 </Grid>
@@ -555,4 +550,3 @@ export default function ProductsEdit() {
         </div>
     )
 }
-           
